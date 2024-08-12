@@ -517,6 +517,21 @@ section .container {
   background-color: #18d26e;
 }
 
+.skills-content {
+  display: flex;
+  align-items: stretch;
+}
+
+.skills-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-image {
+  height: 100%;
+  object-fit: cover;
+}
+
 /*--------------------------------------------------------------
 # Interests
 --------------------------------------------------------------*/
