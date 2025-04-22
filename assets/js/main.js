@@ -250,4 +250,32 @@
    */
   new PureCounter();
 
+  /**
+   * New Portfolio Version Preview
+   * This allows visitors to try the new version of the site
+   */
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if we need to add a "Try New Version" button
+    const addNewVersionLink = () => {
+      if (!document.querySelector('#try-new-version')) {
+        const header = select('#header .container');
+        if (header) {
+          const newVersionLink = document.createElement('div');
+          newVersionLink.innerHTML = `
+            <a id="try-new-version" href="index-new.html" class="btn-new-version" 
+               style="position: fixed; bottom: 80px; right: 30px; background: #18d26e; 
+                      color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none;
+                      box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;">
+              Try New Version
+            </a>
+          `;
+          document.body.appendChild(newVersionLink);
+        }
+      }
+    };
+    
+    // Add the link after a slight delay to ensure the DOM is fully loaded
+    setTimeout(addNewVersionLink, 1500);
+  });
+
 })()

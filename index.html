@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>John J. Lawal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John J. Lawal - Portfolio</title>
+  <meta name="description" content="John J. Lawal - Data Science, Web Development, and Data Analysis professional">
+  <meta name="keywords" content="Web Developer, Software Developer, Data Science, Python, Django">
+  <meta name="author" content="John J. Lawal">
+  
   <!-- SEO Meta Tags -->
   <meta name="robots" content="index, follow">
   <meta name="author" content="John J Lawal, John Lawal, John Jay, JayBeloved">
   <meta name="keywords" content="Web Developer, Software Developer, Nigeria, Abuja, Data Science, Consulting, Python, Accounting">
-  <meta name="description" content="John J. Lawal - Web Developer, Software Developer, Nigeria, Abuja, Data Science, Consulting, Python, Accounting">
+  <meta name="description" content="John J. Lawal - Web Developer, Tech Consultant, Software Developer, Nigeria, Abuja, Data Science, Consulting, Python, Accounting">
 
   <!-- Social Media Meta Tags -->
   <meta property="og:title" content="John J. Lawal">
@@ -24,7 +26,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="John J. Lawal">
   <meta name="twitter:description" content="Web Developer, Software Developer, Nigeria, Abuja, Data Science, Consulting, Python, Accounting">
-  <meta name="twitter:image" content="assets/img/profile.jpg">
+  <meta name="twitter:image" content="assets/img/jjlpp.png">
   <meta name="twitter:creator" content="@johnjlawal">
 
   <!-- LinkedIn Meta Tags -->
@@ -38,668 +40,954 @@
 
   <!-- Kaggle Meta Tags -->
   <meta property="kaggle:username" content="johnjlawal">
-  <!-- Favicons -->
-  <link href="assets/img/jjl_favicon.png" rel="icon">
-  <link href="assets/img/jjl_icon.png" rel="apple-touch-icon">
 
+
+  <!-- Favicon -->
+  <link href="assets/img/jjl_favi.png" rel="icon">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            secondary: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+            }
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            wave: {
+              '0%': { transform: 'rotate(0deg)' },
+              '10%': { transform: 'rotate(14deg)' },
+              '20%': { transform: 'rotate(-8deg)' },
+              '30%': { transform: 'rotate(14deg)' },
+              '40%': { transform: 'rotate(-4deg)' },
+              '50%': { transform: 'rotate(10deg)' },
+              '60%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(0deg)' }
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.7s ease-out forwards',
+            float: 'float 4s ease-in-out infinite',
+            wave: 'wave 2.5s infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="o241Q8RgSUCmvh110p1K1g" async></script>
-
-  <!-- =======================================================
-  * Template Name: Personal
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Syntax Highlighting Styles */
+    .syntax-keyword { color: #ff79c6; }
+    .syntax-function { color: #50fa7b; }
+    .syntax-string { color: #f1fa8c; }
+    .syntax-variable { color: #8be9fd; }
+    .syntax-number { color: #bd93f9; }
+    .syntax-comment { color: #6272a4; }
+    
+    /* Motion Background */
+    .motion-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2334d399' fill-opacity='0.2'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, #34d399, #22d3ee);
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+    
+    /* Navigation Styles */
+    .nav-blur {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    /* Project Card Styles */
+    .project-card {
+      perspective: 1000px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px) rotateX(5deg);
+      box-shadow: 0 25px 50px -12px rgba(0, 255, 165, 0.25);
+    }
+    
+    /* Button Styles */
+    .glow-button {
+      transition: all 0.3s ease;
+    }
+    
+    .glow-button:hover {
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+      transform: translateY(-2px);
+    }
+    
+    /* Link Hover Effects */
+    .hover-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .hover-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #34d399;
+      transition: width 0.3s ease;
+    }
+    
+    .hover-link:hover {
+      color: #34d399;
+    }
+    
+    .hover-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Scroll To Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Stagger Animation Delay */
+    .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* 3D Card Effect */
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    
+    .card-3d:hover {
+      transform: rotateY(10deg) rotateX(10deg);
+    }
+    
+    .card-3d-layer {
+      transform: translateZ(20px);
+      transition: transform 0.5s ease;
+    }
+    
+    .card-3d:hover .card-3d-layer {
+      transform: translateZ(40px);
+    }
+    
+    /* Terminal Window Styling */
+    .terminal {
+      border-radius: 0.5rem;
+      background-color: #1e293b;
+      overflow: hidden;
+    }
+    
+    .terminal-header {
+      background-color: #334155;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .terminal-button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    
+    .terminal-red { background-color: #ff5f56; }
+    .terminal-yellow { background-color: #ffbd2e; }
+    .terminal-green { background-color: #27c93f; }
+    
+    .terminal-body {
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .terminal-prompt::before {
+      content: '$ ';
+      color: #10b981;
+    }
+    
+    .hidden-initially {
+      opacity: 0;
+    }
+    
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Skill Pill Styles */
+    .skill-pill {
+      background-color: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-pill:hover {
+      background-color: rgba(20, 184, 166, 0.2);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="container">
-
-      <h1><a href="index.html">John J. Lawal</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-      <h2>Data Science |<span> Web Dev </span>| Data Analysis</h2>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link active" href="#header">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#resume">Resume</a></li>
-          <li><a class="nav-link" href="#services">Services</a></li>
-          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-      <div class="social-links">
-        <a href="https://github.com/JayBeloved" class="github"><i class="bi bi-github"></i></a>
-        <a href="https://www.instagram.com/john_j_lawal" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/john-j-lawal" class="linkedin"><i class="bi bi-linkedin"></i></a>
+<body class="bg-dark-900">
+  <!-- Motion Background -->
+  <div class="motion-background"></div>
+  
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+  
+  <!-- Scroll To Top Button -->
+  <button class="scroll-to-top glow-button bg-primary-500 hover:bg-primary-600 text-white rounded-full p-3 shadow-lg" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <!-- Navigation -->
+  <nav class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="nav-blur bg-dark-900 bg-opacity-70 border-b border-dark-700">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="#" class="text-xl font-bold text-white">
+            <span class="syntax-function">John</span>.<span class="syntax-keyword">J</span>.<span class="syntax-variable">Lawal</span><span class="syntax-number">()</span>
+          </a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#about" class="hover-link text-gray-300 hover:text-primary-400">About</a>
+          <a href="#skills" class="hover-link text-gray-300 hover:text-primary-400">Skills</a>
+          <a href="#projects" class="hover-link text-gray-300 hover:text-primary-400">Projects</a>
+          <a href="#experience" class="hover-link text-gray-300 hover:text-primary-400">Experience</a>
+          <a href="#contact" class="hover-link text-gray-300 hover:text-primary-400">Contact</a>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-300 hover:text-primary-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
       </div>
-
     </div>
-  </header>
-  <!-- End Header -->
-
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-
-    <!-- ======= About Me ======= -->
-    <div class="about-me container">
- 
-      <div class="section-title">
-        <h2>About</h2>
-        <p>Learn more about me</p>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden nav-blur bg-dark-800 bg-opacity-95 md:hidden">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="#about" class="text-gray-300 hover:text-primary-400 py-2">About</a>
+        <a href="#skills" class="text-gray-300 hover:text-primary-400 py-2">Skills</a>
+        <a href="#projects" class="text-gray-300 hover:text-primary-400 py-2">Projects</a>
+        <a href="#experience" class="text-gray-300 hover:text-primary-400 py-2">Experience</a>
+        <a href="#contact" class="text-gray-300 hover:text-primary-400 py-2">Contact</a>
       </div>
- 
-      <div class="row">
-        <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/img/me2.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <h3>Data/AI &amp; Software Development</h3>
-          <p class="fst-italic">
-            Bringing a Nexus between Data Analysis, Data Science, AI and Web Development.
-          </p>
-          <div class="row">
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>22 April</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>johnjaylawal.me</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+234 902 330 1269</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Abuja, Nigeria</span></li>
-              </ul>
-            </div>
-            <div class="col-lg-6">
-             <ul>
-               <li><i class="bi bi-chevron-right"></i> <strong>Years of Experience:</strong> <span>5</span></li>
-               <li><i class="bi bi-chevron-right"></i> <strong>Specialization:</strong> <span>Web Development</span></li>
-               <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>connect@johnjaylawal.tech</span></li>
-               <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-             </ul>
-            </div>
-          </div>
-          <p>
-           I am a highly skilled professional with expertise in accounting, Python Django software development, data science, and IT consulting. 
-           Certified by the Accounting Technician Scheme of West Africa (ATSWA), soon to be a qualified chartered accountant with ICAN, I deliver 
-           high-quality code and accurate financial insights. As a data science enthusiast, I help businesses make data-driven decisions. 
-           I am a dedicated professional who takes pride in exceeding client expectations.
-          </p>
-        </div>
-      </div>
- 
-    </div><!-- End About Me -->
- 
-    <!-- ======= Counts ======= -->
-    <div class="counts container">
- 
-      <div class="row">
- 
-        <div class="col-lg-3 col-md-6">
-          <div class="count-box">
-            <i class="bi bi-emoji-smile"></i>
-            <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Happy Clients</p>
-          </div>
-        </div>
- 
-        <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
-          <div class="count-box">
-            <i class="bi bi-journal-richtext"></i>
-            <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Projects</p>
-          </div>
-        </div>
- 
-       <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-         <div class="count-box">
-           <i class="bi bi-code-slash"></i>
-           <span data-purecounter-start="0" data-purecounter-end="600000" data-purecounter-duration="1" class="purecounter"></span>
-           <p>Lines of Code</p>
-         </div>
-       </div>
- 
-       <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-         <div class="count-box">
-           <i class="bi bi-card-checklist"></i>
-           <span data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="1" class="purecounter"></span>
-           <p>Certifications</p>
-         </div>
-       </div>
-      </div>
- 
-    </div><!-- End Counts -->
- 
-   <!-- ======= Skills  ======= -->
-<div class="skills container">
-
-    <div class="section-title">
-      <h2>Skills</h2>
     </div>
+  </nav>
   
-    <div class="row skills-content">
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 md:pt-40 md:pb-32">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-primary-400 code-font mb-4 hidden-initially">/* Welcome to my portfolio */</p>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 hidden-initially">
+          <span class="syntax-function">John J. Lawal</span>
+        </h1>
+        <p class="text-2xl md:text-3xl text-gray-300 mb-8 hidden-initially">
+          <span class="syntax-keyword">Data</span> / <span class="syntax-variable">AI</span> & <span class="syntax-string">Software Development</span>
+        </p>
+        <div class="hidden-initially">
+          <p class="text-gray-400 text-lg mb-8">
+            I'm a highly skilled professional with expertise in accounting, Python Django software development, data science, and IT consulting. I help businesses build robust applications and make data-driven decisions.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#projects" class="glow-button bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-medium transition-all">
+              View My Work
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <a href="#contact" class="glow-button bg-transparent border border-primary-600 hover:border-primary-500 text-primary-400 hover:text-primary-300 px-6 py-3 rounded-md font-medium transition-all">
+              Get In Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   
-      <div class="col-lg-6 skills-column">
+  <!-- About Section -->
+  <section id="about" class="py-20 md:py-32 bg-dark-800 bg-opacity-50">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-start gap-12">
+        <div class="w-full md:w-1/3 animate-on-scroll">
+          <div class="card-3d bg-dark-700 rounded-lg overflow-hidden">
+            <img data-src="assets/img/jjlpp.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="w-full h-auto lazy-load card-3d-layer" alt="John J. Lawal">
+          </div>
+        </div>
+        
+        <div class="w-full md:w-2/3">
+          <div class="terminal animate-on-scroll">
+            <div class="terminal-header">
+              <div class="terminal-button terminal-red"></div>
+              <div class="terminal-button terminal-yellow"></div>
+              <div class="terminal-button terminal-green"></div>
+              <span class="ml-2 text-sm text-gray-400">about.js</span>
+            </div>
+            <div class="terminal-body">
+              <p class="terminal-prompt syntax-comment">// Personal information</p>
+              <p class="mt-2"><span class="syntax-keyword">const</span> <span class="syntax-variable">profile</span> <span class="syntax-function">=</span> {</p>
+              <p class="ml-4"><span class="syntax-string">name</span>: <span class="syntax-string">'John J. Lawal'</span>,</p>
+              <p class="ml-4"><span class="syntax-string">location</span>: <span class="syntax-string">'Abuja, Nigeria'</span>,</p>
+              <p class="ml-4"><span class="syntax-string">email</span>: <span class="syntax-string">'connect@johnjaylawal.tech'</span>,</p>
+              <p class="ml-4"><span class="syntax-string">interests</span>: [<span class="syntax-string">'Data Science'</span>, <span class="syntax-string">'Web Development'</span>, <span class="syntax-string">'Accounting'</span>, <span class="syntax-string">'IT Consulting'</span>],</p>
+              <p class="ml-4"><span class="syntax-string">education</span>: [</p>
+              <p class="ml-8">{</p>
+              <p class="ml-12"><span class="syntax-string">degree</span>: <span class="syntax-string">'Bachelor of Science, Accounting'</span>,</p>
+              <p class="ml-12"><span class="syntax-string">institution</span>: <span class="syntax-string">'Redeemer's University'</span>,</p>
+              <p class="ml-12"><span class="syntax-string">year</span>: <span class="syntax-number">2024</span></p>
+              <p class="ml-8">},</p>
+              <p class="ml-8">{</p>
+              <p class="ml-12"><span class="syntax-string">degree</span>: <span class="syntax-string">'Associate Accounting Technician'</span>,</p>
+              <p class="ml-12"><span class="syntax-string">institution</span>: <span class="syntax-string">'ATSWA'</span>,</p>
+              <p class="ml-12"><span class="syntax-string">year</span>: <span class="syntax-number">2022</span></p>
+              <p class="ml-8">}</p>
+              <p class="ml-4">]</p>
+              <p>};</p>
+              <p class="mt-4 terminal-prompt syntax-comment">// Personal summary</p>
+              <p class="mt-2"><span class="syntax-keyword">function</span> <span class="syntax-function">getAboutMe</span>() {</p>
+              <p class="ml-4"><span class="syntax-keyword">return</span> <span class="syntax-string">'I am a professional with 5+ years of experience specializing in Python Django development, data analysis, and IT consulting. Certified in accounting through ATSWA, I combine technical skills with financial expertise to deliver comprehensive solutions for businesses.'</span>;</p>
+              <p>}</p>
+            </div>
+          </div>
+          
+          <div class="mt-8 animate-on-scroll">
+            <h3 class="text-xl font-semibold mb-4">Quick Facts</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex items-center">
+                <i class="fas fa-map-marker-alt text-primary-400 w-8"></i>
+                <span>Abuja, Nigeria</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-briefcase text-primary-400 w-8"></i>
+                <span>5+ Years Experience</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-graduation-cap text-primary-400 w-8"></i>
+                <span>B.Sc. Accounting</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-laptop-code text-primary-400 w-8"></i>
+                <span>Full Stack Developer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   
-        <div class="progress">
-          <span class="skill">HTML/CSS <i class="val">99%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        
-        <div class="progress">
-          <span class="skill">Python <i class="val">90%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        
-        <div class="progress">
-          <span class="skill">R <i class="val">65%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        
-        <div class="progress">
-          <span class="skill">Data Science <i class="val">75%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        
-        <div class="progress">
-          <span class="skill">Data Analysis <i class="val">85%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        
-        <div class="progress">
-          <span class="skill">Full Stack Development <i class="val">85%</i></span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-  
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 md:py-32">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16 animate-on-scroll">
+        <p class="text-primary-400 code-font mb-2">/* My toolkit */</p>
+        <h2 class="text-3xl md:text-4xl font-bold">Skills & Expertise</h2>
       </div>
       
-      <div class="col-lg-6" data-aos="fade-right">
-        <img src="assets/img/me.jpg" class="img-fluid skills-image" alt="">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Technical Skills -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Technical Skills</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Django</span>
+            <span class="skill-pill">HTML/CSS</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">R</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">REST APIs</span>
+          </div>
+        </div>
+        
+        <!-- Data Science -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Data Science</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Data Analysis</span>
+            <span class="skill-pill">Machine Learning</span>
+            <span class="skill-pill">Statistical Analysis</span>
+            <span class="skill-pill">Data Visualization</span>
+            <span class="skill-pill">Pandas</span>
+            <span class="skill-pill">NumPy</span>
+            <span class="skill-pill">Scikit-learn</span>
+          </div>
+        </div>
+        
+        <!-- Accounting -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Accounting</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Financial Reporting</span>
+            <span class="skill-pill">Taxation</span>
+            <span class="skill-pill">Auditing</span>
+            <span class="skill-pill">Managerial Accounting</span>
+            <span class="skill-pill">Financial Analysis</span>
+          </div>
+        </div>
+        
+        <!-- Soft Skills -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Soft Skills</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Problem Solving</span>
+            <span class="skill-pill">Communication</span>
+            <span class="skill-pill">Team Leadership</span>
+            <span class="skill-pill">Project Management</span>
+            <span class="skill-pill">Time Management</span>
+            <span class="skill-pill">Critical Thinking</span>
+          </div>
+        </div>
+        
+        <!-- Web Development -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Web Development</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Full Stack Development</span>
+            <span class="skill-pill">Responsive Design</span>
+            <span class="skill-pill">Front-end Development</span>
+            <span class="skill-pill">Back-end Development</span>
+            <span class="skill-pill">Database Design</span>
+            <span class="skill-pill">API Integration</span>
+          </div>
+        </div>
+        
+        <!-- Consulting -->
+        <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 animate-on-scroll stagger-item">
+          <div class="text-primary-400 text-3xl mb-4">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">IT Consulting</h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="skill-pill">Business Analysis</span>
+            <span class="skill-pill">Requirements Gathering</span>
+            <span class="skill-pill">System Architecture</span>
+            <span class="skill-pill">Strategic Planning</span>
+            <span class="skill-pill">Process Optimization</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div><!-- End Skills -->
- 
-    <!-- ======= Interests ======= -->
-    <div class="interests container">
- 
-      <div class="section-title">
-        <h2>Interests</h2>
-      </div>
- 
-     <div class="row">
-       <div class="col-lg-3 col-md-4">
-         <div class="icon-box">
-           <i class="ri-code-line" style="color: #ffbb2c;"></i>
-           <h3>Python Django</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-         <div class="icon-box">
-           <i class="ri-bar-chart-line" style="color: #5578ff;"></i>
-           <h3>Data Science</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-         <div class="icon-box">
-           <i class="ri-book-3-line" style="color: #e80368;"></i>
-           <h3>Accounting</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-         <div class="icon-box">
-           <i class="ri-server-line" style="color: #e361ff;"></i>
-           <h3>IT Consulting</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-brush-4-line" style="color: #47aeff;"></i>
-           <h3>HTML/CSS</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-stack-line" style="color: #ffa76e;"></i>
-           <h3>Full Stack Development</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-database-2-line" style="color: #11dbcf;"></i>
-           <h3>Data Analysis</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-           <h3>Project Management</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-anchor-line" style="color: #b2904f;"></i>
-           <h3>Machine Learning</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-disc-line" style="color: #b20969;"></i>
-           <h3>Statistical Analysis</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-base-station-line" style="color: #ff5828;"></i>
-           <h3>Continuous Learning</h3>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-4 mt-4">
-         <div class="icon-box">
-           <i class="ri-base-station-line" style="color: #ff5828;"></i>
-           <h3>Research & Writing</h3>
-         </div>
-       </div>
-     </div>
- 
-    </div><!-- End Interests -->
- 
-    <!--======= Testimonials ======= 
-    <div class="testimonials container">
- 
-      <div class="section-title">
-        <h2>Testimonials</h2>
-      </div>
- 
-      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
- 
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>Saul Goodman</h3>
-              <h4>Ceo &amp; Founder</h4>
-            </div>
-          </div>--> <!-- End testimonial item 
- 
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <h3>Sara Wilsson</h3>
-              <h4>Designer</h4>
-            </div>
-          </div> End testimonial item 
- 
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-              <h3>Jena Karlis</h3>
-              <h4>Store Owner</h4>
-            </div>
-          </div> End testimonial item 
- 
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
- 
-      <div class="owl-carousel testimonials-carousel">
- 
-      </div>
- 
-    </div> End Testimonials  --> 
- 
   </section>
-
-  <!-- ======= Resume Section ======= -->
-  <section id="resume" class="resume">
   
-    <div class="container" data-aos="fade-up">
-  
-      <div class="section-title">
-        <h2>Resume</h2>
-        <p>Check My Resume</p>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 md:py-32 bg-dark-800 bg-opacity-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16 animate-on-scroll">
+        <p class="text-primary-400 code-font mb-2">/* Check out my work */</p>
+        <h2 class="text-3xl md:text-4xl font-bold">Featured Projects</h2>
       </div>
-  
-      <div class="row">
-        <div class="col-lg-6">
-          <h3 class="resume-title">Summary</h3>
-          <div class="resume-item pb-0">
-            <h4>John J. Lawal</h4>
-            <p><em>Innovative and deadline-driven Data Scientist with 5+ years of experience in Python Django software development, data analysis, IT consulting, and accounting. Certified by the Accounting Technician Scheme of West Africa (ATSWA), I possess a solid understanding of accounting principles and practices. Proficient in Python, R, SQL, and maintaining financial records. Passionate about data science and machine learning. Skilled in data visualization, statistical analysis, and project management. Strong communication skills and ability to work in a team environment.</em></p>
-            <ul>
-              <li>Abuja, Nigeria</li>
-              <li>(+234) 902 330 1269</li>
-              <li>contact.johnjlawal@gmail.com</li>
-            </ul>
-            </p>
-          </div>
-  
-          <h3 class="resume-title">Education</h3>
-          <div class="resume-item">
-            <h4>National Diploma Accountancy</h4>
-            <h5>2016 - 2018</h5>
-            <p><em>Abraham Adesanya Polytechnic, Ogun State</em></p>
-            <p>Acquired foundational knowledge in accounting principles and practices. Developed skills in financial reporting, taxation, and auditing.</p>
-          </div>
-          <div class="resume-item">
-            <h4>Bachelor of Science Accounting</h4>
-            <h5>2021 - 2024</h5>
-            <p><em>Redeemer's University, Ede, Osun State</em></p>
-            <p>Currently pursuing a degree in Accounting. Gaining in-depth knowledge in areas such as advanced financial accounting, managerial accounting, and financial management.</p>
-          </div>
-          <div class="resume-item">
-            <h4>Associate Accounting Technician (AAT)</h4>
-            <h5>2022</h5>
-            <p><em>Accounting Technician Scheme, West Africa</em></p>
-            <p>Certified by the Accounting Technician Scheme of West Africa (ATSWA). Developed a solid understanding of accounting principles and practices, and gained hands-on experience in maintaining financial records and preparing financial statements.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project Card 1 -->
+        <div class="project-card bg-dark-800 rounded-lg overflow-hidden shadow-lg animate-on-scroll stagger-item">
+          <img data-src="assets/img/portfolio/cares.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="w-full h-48 object-cover lazy-load" alt="C.A.R.E.S Project">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">C.A.R.E.S</h3>
+            <p class="text-gray-400 mb-4">A comprehensive web application built with Django that manages resources and provides tracking functionality.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Python</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Django</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">HTML/CSS</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <a href="#" class="hover-link text-primary-400">View Details</a>
+              <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <h3 class="resume-title">Professional Experience</h3>
-          <div class="resume-item">
-            <h4>President</h4>
-            <h5>Sep 2023 - Aug 2024</h5>
-            <p><em>The Tax Club, Redeemer’s University, Nigeria</em></p>
-            <p>
-              <ul>
-                <li>Formerly the Vice-President, now the current president of the club working hand-in-hand with members of the executive council to ensure that the objectives of the club are achieved.</li>
-                <li>Skills: Taxation, Strategic Communications, Leadership, Organizational Consulting</li>
-              </ul>
-            </p>
+        
+        <!-- Project Card 2 -->
+        <div class="project-card bg-dark-800 rounded-lg overflow-hidden shadow-lg animate-on-scroll stagger-item">
+          <img data-src="assets/img/portfolio/sample_infographics.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="w-full h-48 object-cover lazy-load" alt="Data Analysis Project">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Data Analysis Dashboard</h3>
+            <p class="text-gray-400 mb-4">Interactive data visualization platform for analyzing trends and generating insightful reports.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Python</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Pandas</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">D3.js</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <a href="#" class="hover-link text-primary-400">View Details</a>
+              <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
           </div>
-          <div class="resume-item">
-            <h4>Vice President - RUNASA</h4>
-            <h5>Aug 2023 - Jul 2024</h5>
-            <p><em>Redeemer's University, Ede South, Osun State, Nigeria</em></p>
-            <p>
-              <ul>
-                <li>Served in the academic committee of the Accounting Student Association for over two years, elected as the Vice President for the 2023/2024 Academic Session.</li>
-                <li>Skills: Educational Leadership, Strategic Communications, Project Management, Educational Institutions, Leadership</li>
-              </ul>
-            </p>
-          </div>
-          <div class="resume-item">
-            <h4>Software Developer</h4>
-            <h5>Jan 2023 - Present</h5>
-            <p><em>John J. Lawal Enterprises, Abuja, Federal Capital Territory, Nigeria</em></p>
-            <p>
-              <ul>
-                <li>Skills: Business Intelligence (BI), Strategic Communications, Full-Stack Development, Python (Programming Language), Product Development, Analytical Skills, Systems Analysis, HTML</li>
-              </ul>
-            </p>
-          </div>
-          <div class="resume-item">
-            <h4>Freelance Developer</h4>
-            <h5>Apr 2020 - Present</h5>
-            <p><em>Freelance, Abuja, Federal Capital Territory, Nigeria</em></p>
-            <p>
-              <ul>
-                <li>Developed applications and tech solutions to aid individual and corporate productivity.</li>
-                <li>Skills: Data Science, Full-Stack Development, Heroku, Python (Programming Language), Front-End Development, Analytical Skills, Financial Accounting, Git, Systems Analysis, Communication, Back-End Web Development, Django</li>
-              </ul>
-            </p>
-          </div>
-          <div class="resume-item">
-            <h4>Information Technology Business Consultant</h4>
-            <h5>Apr 2019 - Present</h5>
-            <p><em>CEA Professional Services Limited, Central Business District, Abuja, Nigeria</em></p>
-            <p>
-              <ul>
-                <li>Skills: Analytical Skills, Communication</li>
-              </ul>
-            </p>
+        </div>
+        
+        <!-- Project Card 3 -->
+        <div class="project-card bg-dark-800 rounded-lg overflow-hidden shadow-lg animate-on-scroll stagger-item">
+          <img data-src="assets/img/portfolio/bg_1.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="w-full h-48 object-cover lazy-load" alt="Student Grader Project">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Student Grader</h3>
+            <p class="text-gray-400 mb-4">Automated grading system that processes student submissions and provides detailed performance analysis.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Python</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">SQL</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Flask</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <a href="#" class="hover-link text-primary-400">View Details</a>
+              <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-  
+      
+      <div class="text-center mt-12 animate-on-scroll">
+        <a href="http://johnjaylawal.me" target="_blank" class="glow-button bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-medium transition-all inline-block">
+          View All Projects
+          <i class="fas fa-external-link-alt ml-2"></i>
+        </a>
+      </div>
     </div>
   </section>
-
-  <!-- ======= Services Section ======= -->
-  <section id="services" class="services">
-    <div class="container">
   
-      <div class="section-title">
-        <h2>Services</h2>
-        <p>My Services</p>
+  <!-- Experience Section -->
+  <section id="experience" class="py-20 md:py-32">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16 animate-on-scroll">
+        <p class="text-primary-400 code-font mb-2">/* My professional journey */</p>
+        <h2 class="text-3xl md:text-4xl font-bold">Work Experience</h2>
       </div>
-  
-      <div class="row">
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-code"></i></div>
-            <h4><a href="">Python Django Development</a></h4>
-            <p>Building robust and scalable web applications using Python Django framework.</p>
+      
+      <div class="max-w-3xl mx-auto">
+        <!-- Experience Item 1 -->
+        <div class="relative pl-8 pb-12 animate-on-scroll">
+          <div class="absolute left-0 top-0 h-full w-0.5 bg-primary-500 opacity-30"></div>
+          <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-dark-800 border-2 border-primary-500 z-10"></div>
+          
+          <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 ml-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-semibold">Software Developer</h3>
+              <span class="text-primary-400 text-sm mt-2 md:mt-0">Jan 2023 - Present</span>
+            </div>
+            <p class="text-gray-300 mb-2">John J. Lawal Enterprises, Abuja, Nigeria</p>
+            <p class="text-gray-400 mb-4">Developing full-stack web applications, providing technical solutions, and implementing data analysis tools for clients.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Full-Stack Development</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Python</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Analytical Skills</span>
+            </div>
           </div>
         </div>
-  
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-bar-chart-alt-2"></i></div>
-            <h4><a href="">Data Analysis</a></h4>
-            <p>Performing data cleaning, manipulation, and analysis using Python and R.</p>
+        
+        <!-- Experience Item 2 -->
+        <div class="relative pl-8 pb-12 animate-on-scroll">
+          <div class="absolute left-0 top-0 h-full w-0.5 bg-primary-500 opacity-30"></div>
+          <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-dark-800 border-2 border-primary-500 z-10"></div>
+          
+          <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 ml-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-semibold">President - The Tax Club</h3>
+              <span class="text-primary-400 text-sm mt-2 md:mt-0">Sep 2023 - Aug 2024</span>
+            </div>
+            <p class="text-gray-300 mb-2">Redeemer's University, Nigeria</p>
+            <p class="text-gray-400 mb-4">Working with executive council members to achieve club objectives, coordinating events, and promoting taxation awareness.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Leadership</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Strategic Communications</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Taxation</span>
+            </div>
           </div>
         </div>
-  
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-book"></i></div>
-            <h4><a href="">Accounting</a></h4>
-            <p>Providing accounting services including financial reporting, taxation, and auditing.</p>
+        
+        <!-- Experience Item 3 -->
+        <div class="relative pl-8 pb-12 animate-on-scroll">
+          <div class="absolute left-0 top-0 h-full w-0.5 bg-primary-500 opacity-30"></div>
+          <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-dark-800 border-2 border-primary-500 z-10"></div>
+          
+          <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 ml-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-semibold">IT Business Consultant</h3>
+              <span class="text-primary-400 text-sm mt-2 md:mt-0">Apr 2019 - Present</span>
+            </div>
+            <p class="text-gray-300 mb-2">CEA Professional Services Limited, Abuja, Nigeria</p>
+            <p class="text-gray-400 mb-4">Providing IT consulting services, developing business strategies, and implementing technological solutions for clients.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Business Analysis</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Strategic Planning</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Communication</span>
+            </div>
           </div>
         </div>
-  
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-server"></i></div>
-            <h4><a href="">IT Consulting</a></h4>
-            <p>Offering IT consulting services to help businesses improve their performance and efficiency.</p>
+        
+        <!-- Last Item (No vertical line) -->
+        <div class="relative pl-8 animate-on-scroll">
+          <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-dark-800 border-2 border-primary-500 z-10"></div>
+          
+          <div class="bg-dark-800 bg-opacity-70 rounded-lg p-6 border border-dark-700 ml-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-semibold">Freelance Developer</h3>
+              <span class="text-primary-400 text-sm mt-2 md:mt-0">Apr 2020 - Present</span>
+            </div>
+            <p class="text-gray-300 mb-2">Freelance, Abuja, Nigeria</p>
+            <p class="text-gray-400 mb-4">Developing applications and tech solutions to aid individual and corporate productivity.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Data Science</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Django</span>
+              <span class="text-xs bg-dark-700 text-primary-400 px-2 py-1 rounded">Git</span>
+            </div>
           </div>
         </div>
-  
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-brush"></i></div>
-            <h4><a href="">HTML/CSS Development</a></h4>
-            <p>Creating responsive and interactive web pages using HTML and CSS.</p>
-          </div>
-        </div>
-  
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-layer"></i></div>
-            <h4><a href="">Full Stack Development</a></h4>
-            <p>Developing both front end and back end of web applications.</p>
-          </div>
-        </div>
-  
       </div>
-  
     </div>
   </section>
-
-  <!-- ======= Portfolio Section ======= -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Portfolio</h2>
-        <p>My Works</p>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 md:py-32 bg-dark-800 bg-opacity-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16 animate-on-scroll">
+        <p class="text-primary-400 code-font mb-2">/* Let's connect */</p>
+        <h2 class="text-3xl md:text-4xl font-bold">Get In Touch</h2>
       </div>
-
-      <div class="row portfolio-container">
-
-        <!-- Add your portfolio items here. For example: -->
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/sample_infographics.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Data Analysis</h4>
-              <p>Python Infographic</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/sample_infographics.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="#" target="_blank" title="Portfolio Details"><i class="bx bx-link"></i></a>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="animate-on-scroll">
+            <div class="terminal">
+              <div class="terminal-header">
+                <div class="terminal-button terminal-red"></div>
+                <div class="terminal-button terminal-yellow"></div>
+                <div class="terminal-button terminal-green"></div>
+                <span class="ml-2 text-sm text-gray-400">contact.js</span>
+              </div>
+              <div class="terminal-body">
+                <p class="terminal-prompt syntax-comment">// Let's work together!</p>
+                <p class="mt-2"><span class="syntax-keyword">const</span> <span class="syntax-variable">contact</span> <span class="syntax-function">=</span> {</p>
+                <p class="ml-4"><span class="syntax-string">email</span>: <span class="syntax-string">'connect@johnjaylawal.tech'</span>,</p>
+                <p class="ml-4"><span class="syntax-string">phone</span>: <span class="syntax-string">'+234 902 3301 269'</span>,</p>
+                <p class="ml-4"><span class="syntax-string">location</span>: <span class="syntax-string">'Abuja, Nigeria'</span>,</p>
+                <p class="ml-4"><span class="syntax-string">availability</span>: <span class="syntax-string">'Open to opportunities'</span></p>
+                <p>};</p>
+                <p class="mt-4 terminal-prompt syntax-comment">// Social profiles</p>
+                <p class="mt-2"><span class="syntax-keyword">const</span> <span class="syntax-variable">socialProfiles</span> <span class="syntax-function">=</span> {</p>
+                <p class="ml-4"><span class="syntax-string">github</span>: <span class="syntax-string">'github.com/JayBeloved'</span>,</p>
+                <p class="ml-4"><span class="syntax-string">linkedin</span>: <span class="syntax-string">'linkedin.com/in/john-j-lawal'</span>,</p>
+                <p class="ml-4"><span class="syntax-string">instagram</span>: <span class="syntax-string">'instagram.com/john_j_lawal'</span></p>
+                <p>};</p>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold mb-4">Connect With Me</h3>
+              <div class="flex space-x-4">
+                <a href="https://github.com/JayBeloved" target="_blank" class="bg-dark-700 hover:bg-dark-600 text-white p-3 rounded-full transition-all hover:scale-110">
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/john-j-lawal" target="_blank" class="bg-dark-700 hover:bg-dark-600 text-white p-3 rounded-full transition-all hover:scale-110">
+                  <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="https://www.instagram.com/john_j_lawal" target="_blank" class="bg-dark-700 hover:bg-dark-600 text-white p-3 rounded-full transition-all hover:scale-110">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="skype:live:.cid.8ec1eefdfb260907" class="bg-dark-700 hover:bg-dark-600 text-white p-3 rounded-full transition-all hover:scale-110">
+                  <i class="fab fa-skype text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="animate-on-scroll">
+            <div class="bg-dark-700 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+              
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="bg-primary-500 bg-opacity-20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-envelope text-primary-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-gray-300 font-medium">Email</h4>
+                    <a href="mailto:connect@johnjaylawal.tech" class="text-gray-400 hover:text-primary-400 transition-colors">connect@johnjaylawal.tech</a>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary-500 bg-opacity-20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-phone-alt text-primary-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-gray-300 font-medium">Phone</h4>
+                    <a href="tel:+2349023301269" class="text-gray-400 hover:text-primary-400 transition-colors">+234 902 3301 269</a>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary-500 bg-opacity-20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-map-marker-alt text-primary-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-gray-300 font-medium">Location</h4>
+                    <p class="text-gray-400">Justice Street, Karu, FCT Abuja</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary-500 bg-opacity-20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-clock text-primary-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-gray-300 font-medium">Availability</h4>
+                    <p class="text-gray-400">Available for freelance projects</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Add more portfolio items as needed... -->
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/cares.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>C.A.R.E.S</h4>
-              <p>Web App</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/cares.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="#" target="_blank" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/bg_1.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Student Grader</h4>
-              <p>Python App</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/bg_1.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="#" target="_blank" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
-
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center mt-4">
-          <a href="http://johnjaylawal.me" target="_blank" class="nav-link">View Full Portfolio</a>
-        </div>
-      </div>
-
     </div>
   </section>
-
-  <!-- ======= Contact Section ======= -->
-  <section id="contact" class="contact">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>Contact Me</p>
-      </div>
-
-      <div class="row mt-2">
-
-        <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            <p>Justice Street, Karu, FCT Abuja</p>
-          </div>
+  
+  <!-- Footer -->
+  <footer class="bg-dark-800 py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <span class="text-gray-400">© 2023 John J. Lawal. All rights reserved.</span>
         </div>
-
-        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-share-alt"></i>
-            <h3>Social Profiles</h3>
-            <div class="social-links">
-              <a href="https://github.com/JayBeloved" class="github"><i class="bi bi-github"></i></a>
-              <a href="https://www.instagram.com/john_j_lawal" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="skype:live:.cid.8ec1eefdfb260907" class="google-plus"><i class="bi bi-skype"></i></a>
-              <a href="https://www.linkedin.com/in/john-j-lawal" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-envelope"></i>
-            <h3>Email Me</h3>
-            <p>connect@johnjaylawal.tech</p>
-          </div>
-        </div>
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-phone-call"></i>
-            <h3>Call Me</h3>
-            <p>+234 902 3301 269</p>
-          </div>
+        
+        <div class="flex items-center">
+          <span class="text-gray-400 mr-4">Built with</span>
+          <i class="fas fa-heart text-primary-500 animate-pulse mr-2"></i>
+          <span class="text-gray-400">and</span>
+          <i class="fab fa-html5 text-gray-300 ml-2 mr-1"></i>
+          <i class="fab fa-css3-alt text-gray-300 mr-1"></i>
+          <i class="fab fa-js text-gray-300"></i>
         </div>
       </div>
-
     </div>
-  </section>
-
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
-    Adapted from <a href="https://bootstrapmade.com/">BootstrapMade</a>
-  </div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+  </footer>
+  
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Sticky Navigation
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.classList.add('bg-dark-900', 'shadow-lg');
+      } else {
+        nav.classList.remove('bg-dark-900', 'shadow-lg');
+      }
+    });
+    
+    // Scroll Progress Bar
+    const scrollProgress = document.querySelector('.scroll-progress');
+    window.addEventListener('scroll', () => {
+      const totalScroll = document.body.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / totalScroll) * 100;
+      scrollProgress.style.width = `${scrolled}%`;
+    });
+    
+    // Scroll To Top Button
+    const scrollToTopButton = document.querySelector('.scroll-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopButton.classList.add('visible');
+      } else {
+        scrollToTopButton.classList.remove('visible');
+      }
+    });
+    
+    scrollToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Lazy Loading Images
+    document.addEventListener('DOMContentLoaded', () => {
+      const lazyImages = document.querySelectorAll('.lazy-load');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const image = entry.target;
+              image.src = image.dataset.src;
+              imageObserver.unobserve(image);
+            }
+          });
+        });
+        
+        lazyImages.forEach(image => {
+          imageObserver.observe(image);
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        lazyImages.forEach(image => {
+          image.src = image.dataset.src;
+        });
+      }
+    });
+    
+    // Animate Elements on Scroll
+    const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    animateOnScrollElements.forEach(element => {
+      scrollObserver.observe(element);
+    });
+    
+    // Hero Section Animation
+    const heroElements = document.querySelectorAll('.hidden-initially');
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        heroElements.forEach((element, index) => {
+          setTimeout(() => {
+            element.classList.add('animate-fadeIn');
+          }, index * 200);
+        });
+      }, 300);
+    });
+  </script>
 </body>
-
 </html>
