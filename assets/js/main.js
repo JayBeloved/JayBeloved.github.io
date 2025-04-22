@@ -251,6 +251,36 @@
   new PureCounter();
 
   /**
+   * Video Background Optimization
+   * This ensures the video background works efficiently across devices
+   */
+  document.addEventListener('DOMContentLoaded', function() {
+    const videoElement = document.querySelector('.video-background video');
+    
+    // Check if the video element exists
+    if (videoElement) {
+      // Reduce quality on slower connections
+      if (navigator.connection && navigator.connection.effectiveType.includes('2g')) {
+        videoElement.parentNode.style.display = 'none';
+      }
+      
+      // Handle video loading errors
+      videoElement.addEventListener('error', function() {
+        this.parentNode.style.display = 'none';
+      });
+      
+      // Pause video when not visible to save resources
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          videoElement.pause();
+        } else {
+          videoElement.play();
+        }
+      });
+    }
+  });
+
+  /**
    * New Portfolio Version Preview
    * This allows visitors to try the new version of the site
    */

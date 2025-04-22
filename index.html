@@ -154,7 +154,20 @@
       height: 100%;
       z-index: -1;
       opacity: 0.05;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2334d399' fill-opacity='0.2'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(6,182,212,0.1) 50%, rgba(15,23,42,0.1) 100%);
+      animation: moveBackground 20s linear infinite;
+      
+      @keyframes moveBackground {
+        0% {
+          background-position: 0% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
     }
     
     /* Scroll Progress Bar */
@@ -331,12 +344,69 @@
       background-color: rgba(20, 184, 166, 0.2);
       transform: translateY(-2px);
     }
+    
+    /* Video Background Styles */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+    
+    .video-background video {
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      opacity: 0.15;
+    }
+    
+    .video-background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+    }
+    
+    /* Hide video on smaller devices to improve performance */
+    @media (max-width: 768px) {
+      .video-background {
+        display: none;
+      }
+    }
+    
+    /* Adjust motion background to serve as fallback for mobile devices */
+    .motion-background {
+      z-index: -3;
+      opacity: 0.1;
+    }
   </style>
 </head>
 
 <body class="bg-dark-900">
-  <!-- Motion Background -->
+  <!-- Motion Background (fallback for mobile) -->
   <div class="motion-background"></div>
+  
+  <!-- Video Background (new) -->
+  <div class="video-background">
+    <div class="video-background-overlay"></div>
+    <video autoplay muted loop playsinline>
+      <source src="assets/video/code-animation.mp4" type="video/mp4">
+      <!-- Fallback if MP4 not supported -->
+      <source src="assets/video/code-animation.webm" type="video/webm">
+      <!-- If video can't be loaded at all, CSS background will still be visible -->
+    </video>
+  </div>
   
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress"></div>
@@ -397,7 +467,7 @@
         </p>
         <div class="hidden-initially">
           <p class="text-gray-400 text-lg mb-8">
-            I'm a highly skilled professional with expertise in accounting, Python Django software development, data science, and IT consulting. I help businesses build robust applications and make data-driven decisions.
+            A technology consultant and data scientist from Abuja, Nigeria. I specialize in helping businesses and individuals leverage technology to improve productivity and profitability through data analysis, software development, and IT consulting.
           </p>
           <div class="flex flex-wrap gap-4">
             <a href="#projects" class="glow-button bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-medium transition-all">
@@ -436,7 +506,7 @@
               <p class="mt-2"><span class="syntax-keyword">const</span> <span class="syntax-variable">profile</span> <span class="syntax-function">=</span> {</p>
               <p class="ml-4"><span class="syntax-string">name</span>: <span class="syntax-string">'John J. Lawal'</span>,</p>
               <p class="ml-4"><span class="syntax-string">location</span>: <span class="syntax-string">'Abuja, Nigeria'</span>,</p>
-              <p class="ml-4"><span class="syntax-string">email</span>: <span class="syntax-string">'connect@johnjaylawal.tech'</span>,</p>
+              <p class="ml-4"><span class="syntax-string">email</span>: <span class="syntax-string">'contact.johnjlawal@gmail.com'</span>,</p>
               <p class="ml-4"><span class="syntax-string">interests</span>: [<span class="syntax-string">'Data Science'</span>, <span class="syntax-string">'Web Development'</span>, <span class="syntax-string">'Accounting'</span>, <span class="syntax-string">'IT Consulting'</span>],</p>
               <p class="ml-4"><span class="syntax-string">education</span>: [</p>
               <p class="ml-8">{</p>
@@ -453,7 +523,7 @@
               <p>};</p>
               <p class="mt-4 terminal-prompt syntax-comment">// Personal summary</p>
               <p class="mt-2"><span class="syntax-keyword">function</span> <span class="syntax-function">getAboutMe</span>() {</p>
-              <p class="ml-4"><span class="syntax-keyword">return</span> <span class="syntax-string">'I am a professional with 5+ years of experience specializing in Python Django development, data analysis, and IT consulting. Certified in accounting through ATSWA, I combine technical skills with financial expertise to deliver comprehensive solutions for businesses.'</span>;</p>
+              <p class="ml-4"><span class="syntax-keyword">return</span> <span class="syntax-string">'I am a professional with 5+ years of experience specializing in Python Django development, data analysis, and IT consulting. With a background in accounting and 5+ years in Python development, I bring a unique perspective to technical problem-solving.'</span>;</p>
               <p>}</p>
             </div>
           </div>
