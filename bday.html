@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John's 25 TEAs | Birthday Special</title>
+  
+  <!-- Favicon -->
+  <link href="assets/img/jjl_favi.png" rel="icon">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            secondary: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+            },
+            accent: '#f472b6'
+          },
+          fontFamily: {
+            'dancing': ['"Dancing Script"', 'cursive'],
+            'sans': ['Montserrat', 'sans-serif']
+          },
+          animation: {
+            'float': 'float 4s ease-in-out infinite',
+            'glow': 'glow 10s linear infinite',
+            'fade-in': 'fadeIn 1s forwards',
+            'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+            'confetti': 'confetti 5s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            glow: {
+              '0%': { filter: 'hue-rotate(0deg) drop-shadow(0 0 10px rgba(52, 211, 153, 0.7))' },
+              '50%': { filter: 'hue-rotate(180deg) drop-shadow(0 0 15px rgba(8, 145, 178, 0.7))' },
+              '100%': { filter: 'hue-rotate(360deg) drop-shadow(0 0 10px rgba(52, 211, 153, 0.7))' }
+            },
+            fadeIn: {
+              'from': { opacity: '0', transform: 'translateY(20px)' },
+              'to': { opacity: '1', transform: 'translateY(0)' }
+            },
+            heartbeat: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.2)' }
+            },
+            confetti: {
+              '0%': { transform: 'translateY(-100px) rotate(0deg)', opacity: '1' },
+              '100%': { transform: 'translateY(calc(100vh + 100px)) rotate(360deg)', opacity: '0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      background-color: #0f172a;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(to right, #34d399, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Category Tags */
+    .tag-thought {
+      background-color: rgba(52, 211, 153, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    
+    .tag-experience {
+      background-color: rgba(34, 211, 238, 0.2);
+      color: #22d3ee;
+      border: 1px solid rgba(34, 211, 238, 0.3);
+    }
+    
+    .tag-answer {
+      background-color: rgba(244, 114, 182, 0.2);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    
+    /* Card Animation */
+    .tea-card {
+      transition: all 0.3s ease;
+    }
+    
+    .tea-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Pagination Styles */
+    .pagination-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+    }
+    
+    .pagination-item:hover:not(.active) {
+      background-color: rgba(75, 85, 99, 0.3);
+    }
+    
+    .pagination-item.active {
+      background: linear-gradient(to right, #34d399, #22d3ee);
+      color: #0f172a;
+      font-weight: 600;
+    }
+    
+    /* Card Content Animation */
+    .card-content {
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    
+    .card-content.expanded {
+      max-height: 500px;
+      opacity: 1;
+    }
+    
+    /* Background Pattern */
+    .pattern-overlay {
+      background-image: 
+        radial-gradient(#34d399 1px, transparent 1px), 
+        radial-gradient(#22d3ee 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+    
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      .pagination-container {
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+      
+      .pagination-item {
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-dark-900 font-sans text-gray-100">
+  <!-- Background Elements -->
+  <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-dark-900 to-dark-800"></div>
+  <div class="pattern-overlay fixed inset-0 z-[-1] opacity-5"></div>
+  
+  <!-- Back to Portfolio Button -->
+  <a href="index.html" class="fixed top-5 left-5 bg-dark-800/80 text-gray-100 border border-primary-500 px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-primary-500/20 hover:-translate-y-1 backdrop-blur-sm z-50">
+    <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+  </a>
+  
+  <div class="container mx-auto px-4 py-16 flex flex-col items-center justify-center min-h-screen">
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <h1 class="font-dancing text-4xl md:text-5xl text-primary-400 mb-3 animate-fade-in">John's 25 TEAs</h1>
+      <p class="text-lg mb-2 opacity-90 animate-fade-in delay-100">Thoughts, Experiences & Answers from 2020-2025</p>
+      <p class="text-md font-semibold gradient-text animate-fade-in delay-200">Celebrating 25 years around the sun</p>
+      <div class="mt-6 flex justify-center space-x-4">
+        <div class="flex items-center">
+          <span class="inline-block w-3 h-3 rounded-full bg-primary-400 mr-2"></span>
+          <span class="text-sm text-gray-300">Thoughts</span>
+        </div>
+        <div class="flex items-center">
+          <span class="inline-block w-3 h-3 rounded-full bg-secondary-400 mr-2"></span>
+          <span class="text-sm text-gray-300">Experiences</span>
+        </div>
+        <div class="flex items-center">
+          <span class="inline-block w-3 h-3 rounded-full bg-accent mr-2"></span>
+          <span class="text-sm text-gray-300">Answers</span>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Card Container -->
+    <div id="card-container" class="w-full max-w-3xl mx-auto mb-8">
+      <!-- Cards will be inserted here by JavaScript -->
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination-container flex flex-wrap justify-center gap-2 mt-8">
+      <!-- Pagination will be inserted here by JavaScript -->
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // TEA Content Data
+      const teas = [
+        {
+          id: 1,
+          type: "thought",
+          title: "You Can Outgrow what Worked",
+          content: "KNOW when to adopt new systems and methods. Don't be to rigid that you become a dinosaur in a bus station. Meaning that know when things are working aand when they aren't. And take the bold step of dropping obsolete things. Don't be too stuck in your ways that you don't see the new possibilities. If the axe is blunt, you will need to use more strength."
+        },
+        {
+          id: 2,
+          type: "experience",
+          title: "My First Tech Project",
+          content: "I started programming 2019, when I took a break from school to go into the world and gain experience. I started my programming journey building a legal management system with VBA and Microsoft Access. Although the application was never used and didn't see the light of day, it was a great learning experience. This project ignited my passion for software development and set me on the path to where I am today, also made me realize the kind of developer I wanted to be."
+        },
+        {
+          id: 3,
+          type: "answer",
+          title: "What's the J. in John J. Lawal for?",
+          content: "I get this question alot, well the J is my middle name - Jesutodimu which means Jesus is sufficient for me to hold on to."
+        },
+        {
+          id: 4,
+          type: "thought",
+          title: "Knowledge is Responsibility",
+          content: "[Luke 12:47-48] - To whom much is given, much is required. Knowledge without application leads to spiritual stagnation. Knowledge is not just power; it is responsibility. The more you know, the more accountable you become to act on that knowledge. – Inspired by Dr. Myles Munroe."
+        },
+        {
+          id: 5,
+          type: "thought",
+          title: "Making Up for Strength",
+          content: "[Proverbs 30:24-25]: True strength isn't about size or might, but about wisdom and preparation. The ant teaches us that small doesn't mean powerless. Strength isn't always about physical power; it's about wisdom, preparation, and perseverance. Even the smallest can achieve greatness with the right mindset."
+        },
+        {
+          id: 6,
+          type: "answer",
+          title: "What's your proudest moment as a tech bro?",
+          content: "⭐️One of my proudest moments in tech wasn't building a complex estate management application or turning an excel workbook into a dynamic web application (though that's a story for another day!) - it was using my skills to help my dad with a simple but meaningful problem. Within an hour, I had successfully exported and converted all his notes into individual, organized documents accessible right from his PC! 💻 No more switching between devices or struggling with tiny mobile screens. It was validation that these skills can make a genuine difference in people's lives, even in seemingly small ways."
+        },
+        {
+          id: 7,
+          type: "thought",
+          title: "Fast or Far, your choice......",
+          content: "🐒 : If you want to go fast go alone, there's the road off you go. But if you want to go far we go together. Those lyrics reflect the cornerstone of my approach to business and life. It underscored the undeniable power of networking, collaboration, and leveraging the strengths of others. We aren't omnipotent beings; recognizing our limitations and seeking complementary skills is not a weakness, but a strategic advantage. For a long time, I operated as a lone wolf, priding myself on individual execution. Scaling alone, however, is a tough climb, and the constant pressure can stifle creativity."
+        },
+        {
+          id: 8,
+          type: "experience",
+          title: "Clients go whine you but no panic",
+          content: `Contact: Hello John, the client said the analysis was not okay and he is not impressed at all.
+
+(Sends me a VN of the client's response, I listened and I would not lie I was a little pissed. Even if you are not happy, you should not water down someone's effort na). I wore my professionalism cap and responded politely. I asked for specific areas they wanted corrected etc.
+
+After sometime...
+
+Contact: He agreed to present it first to the reviewer and just come back with the feedback.
+
+Some days later...
+
+JJL: How about the review, what was said?
+
+Contact: The reviewer loved the analysis, and said it was great no changes to be made.
+
+In my mind I was like, I'm still good at what I do 💃💃💃☺️.`
+        },
+        {
+          id: 9,
+          type: "answer",
+          title: "The more the merrier or is it ? 🤔🤔🤔",
+          content: "In the fast-paced world of technology consulting, a common belief persists: the more technology you implement, the better your results will be. This notion can lead businesses to invest heavily in tools and systems without fully understanding their needs or the potential impact on their operations. In my experience, the effectiveness of technology is not solely determined by the quantity of tools used but rather by how well they align with a company's specific goals and workflows."
+        },
+        {
+          id: 10,
+          type: "thought",
+          title: "Understanding Change",
+          content: "Change is one of the most fundamental aspects of human existence. Nothing on earth is as permanent as change. Everything changes - no person or situation is immune. There are four types of change: 1. Change that happens to us 2. Change that happens around us 3. Change that happens within us 4. Change that we initiate"
+        },
+        {
+          id: 11,
+          type: "thought",
+          title: "Maximizing Creativity",
+          content: "A wise man once said that creativity is Intelligence having fun. And there are basically two categories to this creating. It's either you create out of something or you create out of nothing. A wise man once said that creativity is Intelligence having fun. And there are basically two categories to this creating. It's either you create out of something or you create out of nothing. Even if you don't start the vision, idea or project immediately, WRITE IT DOWN. That's a way to bring it to the earth. Just ensure it doesn't die in your heart. The next time you disregard creative thoughts, you have just denied yourself and the earth the pleasure of your creative ability."
+        },
+        {
+          id: 12,
+          type: "answer",
+          title: "How do you stay motivated during long projects?",
+          content: "I break ambitious projects into clear milestones with visible outcomes. Each completed milestone becomes a small win to celebrate. I also mini projects in between to motivate myself and have some adrenaline rush. For sustaining energy, I rotate between different aspects of the project to avoid burnout on any single area. Additionally, I remind myself of the bigger picture and the impact of my work. This helps me stay connected to my purpose and keeps motivation high."
+        },
+        {
+          id: 13,
+          type: "thought",
+          title: "Time and Value",
+          content: "It is not the TIME that determines impact but what was done with the time given, and impact is simply VALUE added. VALUE is worth, value is benefit. Anything valuable is something that has worth or is worthwhile or beneficial. It's expected that the way to make the most of the time we've been given is to invest it on VALUE. Investing your time on value shows that you hold your life important and valuable."
+        },
+        {
+          id: 14,
+          type: "thought",
+          title: "Planning vs. Motivation",
+          content: "Don't be overmotivated and underplanned. Be thorough in your planning. Don't be overmotivated but underplanned. Motivation is a great starter but you don't accomplish because you are motivated, you accomplish because you planned well. Be thorough in your planning."
+        },
+        {
+          id: 15,
+          type: "answer",
+          title: "Why should I discover my purpose?",
+          content: "If we do not properly discern intent, misunderstanding will follow. Intention is far superior to action or activity. Misunderstanding intent guarantees a waste of time, talent, energy, gifts, and resources. Unless we know what God intended, everything we do will be a waste of time."
+        },
+        {
+          id: 16,
+          type: "thought",
+          title: "Your Gift needs Refining",
+          content: "The world is so average it doesn't take much to be a genius. [Rarity increases value. You are worth what you are valued.] Increase value by becoming unique, by becoming significant by becoming rare. Education, Training, Exposure refines you. ."
+        },
+        {
+          id: 17,
+          type: "experience",
+          title: "Integrity in business and career",
+          content: "I was terrible at this, although I get the work done eventually, but not at the time I said, and it's after series of ghosting clients because I was not done with the work, now I know and do better. Having an open line of communication is very important, regular update and feedback. Give yourself enough time for the work in the first place. Integrity is not just about being honest, it's about being reliable and consistent. It's about doing what you say you'll do, when you say you'll do it. It's about being accountable to yourself and others. Integrity is the foundation of trust, and trust is the foundation of all successful relationships, both personal and professional."
+        },
+        {
+          id: 18,
+          type: "answer",
+          title: "How to be a success?",
+          content: "The world is so average it doesn't take much to be a genius. The key to true success is not to pursue success...Don't seek success, seek to become a person of value. Discover your unique gift, refine and deploy to the world. Specialisation brings Uniqueness"
+        },
+        {
+          id: 19,
+          type: "answer",
+          title: "What have helped you so far?",
+          content: "I can say many big words, principles etc. but all of them are all product of one key thing and that's the help and mercy of God. Truly the Lord has been faithful and he has been merciful unto me, and that's the truth."
+        },
+        {
+          id: 20,
+          type: "experience",
+          title: "Fail early, fail often",
+          content: "Failing is not a rare event, rather it is a common element of existence. Failure should be understood as a temporary state rather than a permanent condition. The sooner you fail, the sooner you learn. The sooner you learn, the sooner you succeed. Failure is not the opposite of success; it is part of success. Embrace failure as a stepping stone to growth and improvement. The more you fail, the more you learn, and the closer you get to your goals."
+        },
+        {
+          id: 21,
+          type: "answer",
+          title: "What's your advice for someone starting their tech career today?",
+          content: "Start with a goal in mind, either to build something for yourself, work somewhere, solve a problem etc and then find out what you need to learn to get to that point. Focus on fundamentals over frameworks. Learn to learn effectively. Build public projects that demonstrate your capabilities. Cultivate communication skills as much as technical ones. Find communities that support your growth. Document your journey to help others and build your brand. Remember that persistence often outweighs raw talent—the most successful people in tech aren't necessarily the most brilliant, but the most determined."
+        },
+        {
+          id: 22,
+          type: "thought",
+          title: "The Humble learns and grows",
+          content: "Don't pretend to know when you don't know. Those who truly know act as though they don't know. Even if you know be silent and listen, one day they can say something you don't know. 2. Don't protect your ignorance. Damage and expose your ignorance, destroy your ignorance. To damage your ignorance ask questions. 3. Don't defend your ignorance. You don't cast out ignorance in the name of Jesus, knowledge casts out ignorance."
+        },
+        {
+          id: 23,
+          type: "experience",
+          title: "Communicating is as important as coding",
+          content: "Earlier on when I started software development, I would priotize getting the job done, not carrying anyone along, just showing up with solutions that worked but no one understood it and how I got it. I even had a round table team meeting held because of me once, where everyone on the team where airing their displeasure about my work style and felt left out. I was so focused on the code that I neglected the people. I learned that communication is as important as coding. It's not just about writing code; it's about writing code that others can understand and maintain. It's about collaborating with your team, sharing knowledge, and building relationships. Communication is the key to success in any field, especially in tech."
+        },
+        {
+          id: 24,
+          type: "answer",
+          title: "How do you unwind?",
+          content: "MUSIC MUSIC MUSIC. I love music, I love to listen to music, I love to play music, I love to sing music. Music is my escape from the world. It helps me unwind and relax after a long day of coding and problem-solving. Whether it's doing a cover of a song, singing along to my favorite songs or musicals, or just listening to some good tunes, music is my go-to way to recharge and find balance."
+        },
+        {
+          id: 25,
+          type: "thought",
+          title: "Sometimes less is enough",
+          content: "You don't need to know everything, you just need to know enough. Identify your knowledge and understanding gap, identify the knowledge requirement and start learning, once you've gotten the requirement get to work. You don't need to know it all, you can even leverage other people's brain. "
+        }
+      ];
+      
+      let currentPage = 1;
+      const cardContainer = document.getElementById('card-container');
+      const paginationContainer = document.querySelector('.pagination-container');
+      
+      // Initialize the page
+      renderCard(currentPage);
+      renderPagination();
+      
+      // Render the current card based on page number
+      function renderCard(pageNumber) {
+        const tea = teas[pageNumber - 1];
+        cardContainer.innerHTML = '';
+        
+        let tagClass, tagIcon;
+        switch(tea.type) {
+          case 'thought':
+            tagClass = 'tag-thought';
+            tagIcon = 'fa-lightbulb';
+            break;
+          case 'experience':
+            tagClass = 'tag-experience';
+            tagIcon = 'fa-mountain';
+            break;
+          case 'answer':
+            tagClass = 'tag-answer';
+            tagIcon = 'fa-comment-dots';
+            break;
+        }
+        
+        const cardHTML = `
+          <div class="tea-card bg-dark-800 bg-opacity-70 rounded-lg overflow-hidden shadow-lg border border-dark-700">
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-4">
+                <span class="${tagClass} text-xs px-3 py-1 rounded-full uppercase tracking-wider flex items-center">
+                  <i class="fas ${tagIcon} mr-2"></i>
+                  ${tea.type}
+                </span>
+                <span class="bg-dark-700 text-gray-400 text-xs px-3 py-1 rounded-full">
+                  ${tea.id}/25
+                </span>
+              </div>
+              
+              <h3 class="text-xl md:text-2xl font-semibold mb-4">${tea.title}</h3>
+              
+              <div id="card-content" class="card-content">
+                <p class="text-gray-300 mb-4">${tea.content}</p>
+              </div>
+              
+              <button id="toggle-content" class="mt-4 bg-dark-700 hover:bg-dark-600 text-primary-400 px-4 py-2 rounded-md transition-all duration-300 flex items-center">
+                <span id="button-text">Read More</span>
+                <i id="button-icon" class="fas fa-chevron-down ml-2"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        
+        cardContainer.innerHTML = cardHTML;
+        
+        // Add event listener to toggle content visibility
+        const toggleButton = document.getElementById('toggle-content');
+        const content = document.getElementById('card-content');
+        const buttonText = document.getElementById('button-text');
+        const buttonIcon = document.getElementById('button-icon');
+        
+        toggleButton.addEventListener('click', function() {
+          content.classList.toggle('expanded');
+          
+          if (content.classList.contains('expanded')) {
+            buttonText.textContent = 'Show Less';
+            buttonIcon.classList.remove('fa-chevron-down');
+            buttonIcon.classList.add('fa-chevron-up');
+          } else {
+            buttonText.textContent = 'Read More';
+            buttonIcon.classList.remove('fa-chevron-up');
+            buttonIcon.classList.add('fa-chevron-down');
+          }
+        });
+      }
+      
+      // Render pagination controls
+      function renderPagination() {
+        let paginationHTML = '';
+        
+        // Previous button
+        paginationHTML += `
+          <button class="pagination-item ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}" 
+                  ${currentPage === 1 ? 'disabled' : ''} 
+                  data-page="prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+        `;
+        
+        // Page numbers
+        for (let i = 1; i <= teas.length; i++) {
+          paginationHTML += `
+            <button class="pagination-item ${currentPage === i ? 'active' : ''}" data-page="${i}">
+              ${i}
+            </button>
+          `;
+        }
+        
+        // Next button
+        paginationHTML += `
+          <button class="pagination-item ${currentPage === teas.length ? 'opacity-50 cursor-not-allowed' : ''}" 
+                  ${currentPage === teas.length ? 'disabled' : ''} 
+                  data-page="next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        `;
+        
+        paginationContainer.innerHTML = paginationHTML;
+        
+        // Add event listeners to pagination buttons
+        const pageButtons = document.querySelectorAll('[data-page]');
+        pageButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const page = this.dataset.page;
+            
+            if (page === 'prev' && currentPage > 1) {
+              currentPage--;
+            } else if (page === 'next' && currentPage < teas.length) {
+              currentPage++;
+            } else if (page !== 'prev' && page !== 'next') {
+              currentPage = parseInt(page);
+            }
+            
+            renderCard(currentPage);
+            renderPagination();
+            
+            // Scroll to top of card
+            cardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
