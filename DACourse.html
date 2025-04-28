@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JJL Data Analysis Training Programme Guide</title>
+  
+  <!-- Favicon -->
+  <link href="assets/img/jjl_favi.png" rel="icon">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            secondary: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+            }
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.7s ease-out forwards',
+            float: 'float 4s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Motion Background */
+    .motion-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+      background: radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(6,182,212,0.1) 50%, rgba(15,23,42,0.1) 100%);
+      animation: moveBackground 20s linear infinite;
+    }
+    
+    @keyframes moveBackground {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
+    
+    /* Timeline Styles */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #334155;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+    
+    .container-timeline {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+    
+    .left {
+      left: 0;
+    }
+    
+    .right {
+      left: 50%;
+    }
+    
+    .container-timeline::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -17px;
+      background-color: #0f172a;
+      border: 4px solid #10b981;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .left::after {
+      right: -17px;
+    }
+    
+    .right::after {
+      left: -17px;
+    }
+    
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .container-timeline {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .right {
+        left: 0%;
+      }
+      
+      .left::after, .right::after {
+        left: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-dark-900">
+  <!-- Motion Background -->
+  <div class="motion-background"></div>
+  
+  <!-- Navigation -->
+  <nav class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="bg-dark-900 bg-opacity-70 backdrop-blur-md border-b border-dark-700">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-white">
+            <span class="text-primary-400">John</span>.<span class="text-white">J</span>.<span class="text-primary-300">Lawal</span><span class="text-primary-500">()</span>
+          </a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-300 hover:text-primary-400 transition-colors">Home</a>
+          <a href="about.html" class="text-gray-300 hover:text-primary-400 transition-colors">About</a>
+          <a href="services.html" class="text-gray-300 hover:text-primary-400 transition-colors">Services</a>
+          <a href="portfolio.html" class="text-gray-300 hover:text-primary-400 transition-colors">Portfolio</a>
+          <a href="blog.html" class="text-gray-300 hover:text-primary-400 transition-colors">Blog</a>
+          <a href="contact.html" class="text-gray-300 hover:text-primary-400 transition-colors">Contact</a>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-300 hover:text-primary-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-dark-800 bg-opacity-95 backdrop-blur-md md:hidden">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="index.html" class="text-gray-300 hover:text-primary-400 py-2">Home</a>
+        <a href="about.html" class="text-gray-300 hover:text-primary-400 py-2">About</a>
+        <a href="services.html" class="text-gray-300 hover:text-primary-400 py-2">Services</a>
+        <a href="portfolio.html" class="text-gray-300 hover:text-primary-400 py-2">Portfolio</a>
+        <a href="blog.html" class="text-gray-300 hover:text-primary-400 py-2">Blog</a>
+        <a href="contact.html" class="text-gray-300 hover:text-primary-400 py-2">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Course Header -->
+  <section class="pt-32 pb-20 bg-gradient-to-b from-dark-800 to-dark-900 relative overflow-hidden">
+    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover opacity-20">
+      <source src="assets/video/DA-with-JJL.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <p class="text-primary-400 code-font mb-4 animate-fadeIn">/* Master data analysis for industry and research */</p>
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fadeIn">
+        JJL Data Analysis Training Programme
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fadeIn">
+        Prepare for the competitive data analysis job market with our intensive one-on-one program
+      </p>
+      <a href="#contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block animate-fadeIn">
+        Apply Now
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container mx-auto px-4">
+      <!-- About Instructor -->
+      <section id="instructor" class="py-16 md:py-24 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">About the Instructor</h2>
+        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="relative w-64 h-64 overflow-hidden rounded-full border-4 border-primary-500 transform transition-all hover:scale-105">
+              <img src="assets/img/jjlpp.png" alt="John J. Lawal" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark-900 to-transparent opacity-50"></div>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-primary-400">John J. Lawal</h3>
+            <div class="bg-dark-800 bg-opacity-50 p-6 rounded-lg border border-dark-700">
+              <p class="text-gray-300 mb-4">Data Scientist and Technology Consultant with 5+ years of experience in Python development, data analysis, and IT consulting. With a background in accounting and software development, John brings a unique perspective to technical problem-solving and data analysis.</p>
+              <p class="text-gray-300 mb-4">He specializes in helping businesses and individuals leverage technology to improve productivity and profitability through data analysis, software development, and IT consulting.</p>
+              <div class="flex items-center text-primary-400">
+                <i class="fas fa-link mr-2"></i>
+                <a href="https://johnjaylawal.me" target="_blank" class="hover:text-primary-300 transition-colors">Learn more about John</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Programme Overview -->
+      <section id="overview" class="py-16 md:py-24 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Programme Overview</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700 mb-12">
+          <p class="text-gray-300 text-lg">This intensive one-on-one data analysis training programme is designed to prepare participants for the competitive data analysis job market, with a focus on securing remote positions with companies like Turing. The programme covers both industry-standard data analysis tools and academic research analysis techniques.</p>
+        </div>
+        
+        <h3 class="text-2xl font-semibold mb-8 text-center">Programme Objectives</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all hover:transform hover:scale-105">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Technical Proficiency</h4>
+            <p class="text-gray-400">Develop proficiency in essential data analysis tools and technologies</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all hover:transform hover:scale-105">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Portfolio Building</h4>
+            <p class="text-gray-400">Build a portfolio of real-world data analysis projects</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all hover:transform hover:scale-105">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-microscope"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Research Analysis</h4>
+            <p class="text-gray-400">Master academic research analysis using specialized tools</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all hover:transform hover:scale-105">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Personal Branding</h4>
+            <p class="text-gray-400">Develop personal branding and job readiness skills</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all hover:transform hover:scale-105">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Employment Success</h4>
+            <p class="text-gray-400">Secure remote data analysis positions by programme completion</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Curriculum -->
+      <section id="curriculum" class="py-16 md:py-24 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Curriculum</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 1: Excel for Data Analysis</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Data cleaning and preparation techniques</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Advanced formulas and functions</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Pivot tables and data visualization</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Statistical analysis in Excel</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Practical applications and case studies</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 2: SQL Fundamentals</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Database concepts and SQL syntax</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Data querying and manipulation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Joins and relationships</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Subqueries and CTEs</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Performance optimization</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 3: Power BI</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Dashboard creation and design principles</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Data modeling and relationships</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>DAX formulas and measures</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Interactive visualizations</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Publishing and sharing reports</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 4: Python for Data Analysis</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Python fundamentals for data analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Working with pandas and NumPy</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Data visualization with matplotlib and seaborn</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Statistical analysis and hypothesis testing</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Machine learning basics</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 5: Academic Research Analysis</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>SPSS fundamentals and data preparation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Statistical tests and analysis techniques</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>EViews for econometric analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Research methodology and data interpretation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Creating research reports and visualizations</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all hover:transform hover:scale-[1.02]">
+            <div class="bg-primary-600 py-4 px-6">
+              <h3 class="text-xl font-semibold text-white">Module 6: Personal Branding & Job Readiness</h3>
+            </div>
+            <div class="p-6">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Building a data analyst portfolio</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Resume and LinkedIn optimization</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Technical interview preparation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Remote work best practices</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                  <span>Job application strategies for platforms like Turing</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Programme Schedule -->
+      <section id="schedule" class="py-16 md:py-24 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Programme Schedule</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+            <div class="flex items-center mb-6">
+              <div class="bg-primary-500 bg-opacity-20 p-3 rounded-full mr-4">
+                <i class="fas fa-calendar-alt text-primary-400 text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold">Start Date</h3>
+                <p class="text-gray-300 text-lg">May 2nd, 2025</p>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-4">Class Schedule</h3>
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th class="bg-primary-700 text-white p-3 text-left rounded-tl-md">Day</th>
+                    <th class="bg-primary-700 text-white p-3 text-left">Time</th>
+                    <th class="bg-primary-700 text-white p-3 text-left rounded-tr-md">Focus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-dark-600">
+                    <td class="p-3 bg-dark-700 bg-opacity-30">Friday</td>
+                    <td class="p-3 bg-dark-700 bg-opacity-30">Flexible</td>
+                    <td class="p-3 bg-dark-700 bg-opacity-30">Theory & Concepts</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 bg-dark-700 bg-opacity-50 rounded-bl-md">Saturday</td>
+                    <td class="p-3 bg-dark-700 bg-opacity-50">Flexible</td>
+                    <td class="p-3 bg-dark-700 bg-opacity-50 rounded-br-md">Practical Applications & Projects</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+            <h3 class="text-xl font-semibold mb-6 flex items-center">
+              <i class="fas fa-headset text-primary-400 mr-2"></i>
+              Additional Support
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="bg-primary-500 bg-opacity-20 p-2 rounded-md mr-4 mt-1">
+                  <i class="fab fa-whatsapp text-primary-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">Weekly Tasks and Assignments</h4>
+                  <p class="text-gray-400">Receive weekly assignments and feedback via WhatsApp</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-primary-500 bg-opacity-20 p-2 rounded-md mr-4 mt-1">
+                  <i class="fas fa-user-friends text-primary-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">One-on-one Mentoring</h4>
+                  <p class="text-gray-400">Access to mentoring sessions as needed</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-primary-500 bg-opacity-20 p-2 rounded-md mr-4 mt-1">
+                  <i class="fas fa-database text-primary-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">Learning Resources</h4>
+                  <p class="text-gray-400">Access to curated learning materials and practice datasets</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Programme Timeline -->
+      <section id="timeline" class="py-16 md:py-24 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Programme Timeline</h2>
+        <div class="timeline">
+          <div class="container-timeline left">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 1-3: Excel for Data Analysis</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Introduction to data analysis concepts</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Excel fundamentals and advanced techniques</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Mini-project: Business data analysis using Excel</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-timeline right">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 4-6: SQL Fundamentals</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Database concepts and SQL basics</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Advanced querying and data manipulation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Mini-project: Database design and analysis</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-timeline left">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 7-9: Power BI</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Dashboard creation and visualization principles</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Advanced Power BI features</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Mini-project: Interactive business dashboard</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-timeline right">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 10-12: Python for Data Analysis</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Python programming fundamentals</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Data analysis with pandas and visualization</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Mini-project: Exploratory data analysis</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-timeline left">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 13-15: Academic Research Analysis</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>SPSS and EViews fundamentals</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Statistical analysis techniques</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Mini-project: Research paper data analysis</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-timeline right">
+            <div class="content bg-dark-800 rounded-lg p-6 shadow-lg hover:shadow-primary-500/10 transition-all">
+              <h3 class="text-xl font-semibold mb-3 text-primary-400">Week 16-18: Personal Branding & Job Readiness</h3>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Portfolio development</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Interview preparation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-angle-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Final project: Comprehensive data analysis project</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Assessment and Requirements -->
+      <section id="assessment" class="py-16 md:py-24 animate-on-scroll">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <div class="flex items-center mb-6">
+              <div class="bg-primary-500 bg-opacity-20 p-3 rounded-full mr-4">
+                <i class="fas fa-clipboard-check text-primary-400 text-xl"></i>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold">Assessment and Certification</h2>
+            </div>
+            <div class="bg-dark-800 bg-opacity-50 p-6 rounded-lg border border-dark-700">
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-certificate text-primary-400 mt-1 mr-3"></i>
+                  <span>Weekly assignments and quizzes</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-certificate text-primary-400 mt-1 mr-3"></i>
+                  <span>Module completion projects</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-certificate text-primary-400 mt-1 mr-3"></i>
+                  <span>Final capstone project</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-certificate text-primary-400 mt-1 mr-3"></i>
+                  <span>Certificate of completion</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div>
+            <div class="flex items-center mb-6">
+              <div class="bg-primary-500 bg-opacity-20 p-3 rounded-full mr-4">
+                <i class="fas fa-laptop text-primary-400 text-xl"></i>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold">Requirements</h2>
+            </div>
+            <div class="bg-dark-800 bg-opacity-50 p-6 rounded-lg border border-dark-700">
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-check text-primary-400 mt-1 mr-3"></i>
+                  <span>Laptop with minimum 8GB RAM</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check text-primary-400 mt-1 mr-3"></i>
+                  <span>Internet connection for remote sessions</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check text-primary-400 mt-1 mr-3"></i>
+                  <span>Basic computer literacy</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check text-primary-400 mt-1 mr-3"></i>
+                  <span>Commitment to complete assignments and projects</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Application Process -->
+      <section id="contact" class="py-16 md:py-24 animate-on-scroll">
+        <div class="text-center mb-12">
+          <p class="text-primary-400 code-font mb-2">/* Begin your data analysis journey */</p>
+          <h2 class="text-3xl md:text-4xl font-bold">How to Apply</h2>
+        </div>
+        
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <p class="text-lg text-center mb-8">Contact John J. Lawal to begin your journey into data analysis:</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="flex items-start">
+              <div class="bg-primary-500 bg-opacity-20 p-3 rounded-full mr-4">
+                <i class="fas fa-envelope text-primary-400"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium">Email</h4>
+                <a href="mailto:contact.johnjlawal@gmail.com" class="text-gray-300 hover:text-primary-400 transition-colors">contact.johnjlawal@gmail.com</a>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-primary-500 bg-opacity-20 p-3 rounded-full mr-4">
+                <i class="fas fa-phone text-primary-400"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium">Phone</h4>
+                <a href="tel:+2349023301269" class="text-gray-300 hover:text-primary-400 transition-colors">+234 902 3301 269</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-dark-600 pt-8">
+            <h3 class="text-xl font-semibold mb-4">Investment</h3>
+            <p class="text-gray-300">Please contact for current programme pricing and payment options.</p>
+          </div>
+          
+          <div class="text-center mt-10">
+            <h3 class="text-2xl font-semibold mb-4">Ready to Transform Your Data Analysis Skills?</h3>
+            <p class="text-gray-300 mb-6">This programme is designed and delivered by John J. Lawal, leveraging his expertise in data analysis, software development, and IT consulting to provide a comprehensive learning experience tailored to each participant's needs and goals.</p>
+            <!-- <a href="mailto:connect@johnjaylawal.tech" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block">
+              Apply Now
+              <i class="fas fa-paper-plane ml-2"></i>
+            </a> -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <span class="text-gray-400">© <script>document.write(new Date().getFullYear())</script> John J. Lawal. All rights reserved.</span>
+        </div>
+        
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Sticky Navigation
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.classList.add('shadow-lg');
+      } else {
+        nav.classList.remove('shadow-lg');
+      }
+    });
+    
+    // Animate Elements on Scroll
+    const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    animateOnScrollElements.forEach(element => {
+      scrollObserver.observe(element);
+    });
+  </script>
+</body>
+</html>
