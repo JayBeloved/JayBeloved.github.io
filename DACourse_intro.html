@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Data Analytics - JJL Training</title>
+  
+  <!-- Favicon -->
+  <link href="assets/img/jjl_favi.png" rel="icon">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            secondary: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+            }
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.7s ease-out forwards',
+            float: 'float 4s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Motion Background */
+    .motion-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+      background: radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(6,182,212,0.1) 50%, rgba(15,23,42,0.1) 100%);
+      animation: moveBackground 20s linear infinite;
+    }
+    
+    @keyframes moveBackground {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
+    
+    /* Animate on scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Course content styles */
+    .course-section {
+      border-left: 4px solid #10b981;
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .course-section:before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #10b981;
+      left: -10px;
+      top: 0;
+    }
+
+    .course-card {
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-dark-900">
+  <!-- Motion Background -->
+  <div class="motion-background"></div>
+  
+  <!-- Navigation -->
+  <nav class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="bg-dark-900 bg-opacity-70 backdrop-blur-md border-b border-dark-700">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-white">
+            <span class="text-primary-400">John</span>.<span class="text-white">J</span>.<span class="text-primary-300">Lawal</span><span class="text-primary-500">()</span>
+          </a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-300 hover:text-primary-400 transition-colors">Portfolio</a>
+          <a href="DACourse.html" class="text-gray-300 hover:text-primary-400 transition-colors">Course Home</a>
+          <a href="DACourse_intro.html" class="text-gray-300 hover:text-primary-400 transition-colors">Intro to DA</a>
+          <a href="DACourse_ExcelV1.html" class="text-gray-300 hover:text-primary-400 transition-colors">DA with Excel</a>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-300 hover:text-primary-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-dark-800 bg-opacity-95 backdrop-blur-md md:hidden">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="index.html" class="text-gray-300 hover:text-primary-400 py-2">Portfolio</a>
+        <a href="DACourse.html" class="text-gray-300 hover:text-primary-400 py-2">Course Home</a>
+        <a href="DACourse_intro.html" class="text-gray-300 hover:text-primary-400 py-2">Intro to DA</a>
+        <a href="DACourse_ExcelV1.html" class="text-gray-300 hover:text-primary-400 py-2">DA with Excel</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Course Header -->
+  <section class="pt-32 pb-20 bg-gradient-to-b from-dark-800 to-dark-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-900/20 to-secondary-900/20 z-0"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="w-full md:w-3/5">
+          <p class="text-primary-400 code-font mb-4 animate-fadeIn">/* Module 3 */</p>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fadeIn">
+            Introduction to Data Analytics
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 animate-fadeIn">
+            Learn the fundamentals of data analysis, types of data, and the data analyst ecosystem
+          </p>
+          <div class="flex flex-wrap gap-4 animate-fadeIn">
+            <a href="#curriculum" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block">
+              View Curriculum
+              <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+            <a href="DACourse.html" class="bg-transparent border border-primary-500 text-primary-400 hover:text-primary-300 px-6 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block">
+              Back to Course Overview
+            </a>
+          </div>
+        </div>
+        <div class="w-full md:w-2/5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="absolute inset-0 bg-primary-500 rounded-lg blur-xl opacity-20 animate-pulse"></div>
+            <div class="relative bg-dark-800 border border-dark-600 rounded-lg overflow-hidden">
+              <div class="aspect-w-16 aspect-h-9 w-full">
+                <img src="assets/img/data-analytics-intro.jpg" alt="Data Analytics Introduction" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="bg-primary-500/20 text-primary-300 px-3 py-1 rounded-full text-sm font-medium">Module 3</span>
+                  <span class="text-gray-400"><i class="fas fa-clock mr-2"></i>4 weeks</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Course Highlights</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Data Analyst Ecosystem</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Types of Data & File Formats</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Data Quality & Privacy</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container mx-auto px-4">
+      <!-- Course Overview -->
+      <section id="overview" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Course Overview</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <p class="text-gray-300 text-lg mb-6">
+            This module introduces you to the fundamentals of data analysis, focusing on the data analyst ecosystem, types of data, and data quality considerations. You'll gain a comprehensive understanding of the data analysis landscape and the tools used by data professionals.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-dark-700 p-4 rounded-lg">
+              <h4 class="font-semibold mb-2 text-primary-400"><i class="fas fa-users mr-2"></i>Target Audience</h4>
+              <p class="text-gray-300">Beginners interested in data analysis, business professionals seeking data skills, and students exploring data-related careers.</p>
+            </div>
+            <div class="bg-dark-700 p-4 rounded-lg">
+              <h4 class="font-semibold mb-2 text-primary-400"><i class="fas fa-graduation-cap mr-2"></i>Prerequisites</h4>
+              <p class="text-gray-300">Basic computer skills and familiarity with spreadsheets. No prior data analysis experience required.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learning Objectives -->
+      <section id="objectives" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Learning Objectives</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Understand the Data Ecosystem</h4>
+            <p class="text-gray-400">Gain a comprehensive understanding of the data analyst ecosystem and how different components interact.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-database"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Identify Data Types</h4>
+            <p class="text-gray-400">Learn to distinguish between different types of data and understand their appropriate applications.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Work with File Formats</h4>
+            <p class="text-gray-400">Understand different file formats used in data analysis and when to use each one.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Ensure Data Quality & Privacy</h4>
+            <p class="text-gray-400">Learn the principles of data quality and privacy considerations in data analysis.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-plug"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Access Data Sources</h4>
+            <p class="text-gray-400">Explore various data sources and learn how to access them using service bindings.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-code"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Explore Data Languages</h4>
+            <p class="text-gray-400">Get introduced to programming languages commonly used by data professionals.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Curriculum -->
+      <section id="curriculum" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-12 text-center">Detailed Curriculum</h2>
+        
+        <!-- Module 1 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Overview of the Data Analyst Ecosystem</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to data analysis and its importance</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Key components of the data analysis ecosystem</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Roles and responsibilities in data analysis</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Data analysis workflow and lifecycle</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Tools and technologies in the data ecosystem</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">The data analyst ecosystem encompasses the entire environment in which data analysis takes place, including people, processes, tools, and data sources. Understanding this ecosystem is crucial for effective data analysis.</p>
+                <p class="text-gray-300">You'll learn how different roles like data analysts, data scientists, and data engineers collaborate, and how various tools fit into the broader data landscape.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 2 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Types of Data</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Structured vs. unstructured data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Quantitative vs. qualitative data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Categorical, numerical, and time-series data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Primary vs. secondary data sources</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Big data characteristics</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Different types of data require different analysis approaches. Understanding the nature of your data is essential for choosing appropriate analysis methods and tools.</p>
+                <p class="text-gray-300">You'll learn to identify various data types and understand their characteristics, limitations, and appropriate use cases in analysis scenarios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 3 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Understanding Different Types of File Formats</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Spreadsheet formats (XLS, XLSX, CSV)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Database file formats</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Text-based formats (TXT, JSON, XML)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Statistical software formats</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Choosing the right format for different scenarios</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Data is stored in various file formats, each with its own advantages and limitations. Understanding these formats is crucial for efficient data handling and analysis.</p>
+                <p class="text-gray-300">You'll learn about common file formats used in data analysis, their characteristics, and how to convert between different formats as needed for your analysis workflow.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 4 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Sources of Data Using Service Bindings</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to data sources and service bindings</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Accessing databases and data warehouses</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Working with APIs and web services</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Cloud-based data sources</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Data integration challenges and solutions</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Modern data analysis often involves accessing data from various sources through service bindings, which are connections that allow applications to access external services.</p>
+                <p class="text-gray-300">You'll learn how to connect to different data sources, understand authentication and authorization requirements, and handle data integration challenges.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 5 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Languages for Data Professionals</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Overview of programming languages in data analysis</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to SQL for data querying</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Python and R for data analysis</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Specialized languages and tools</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Choosing the right language for different tasks</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Data professionals use various programming languages and tools depending on their specific tasks and requirements. Understanding the landscape of data languages is essential for career growth.</p>
+                <p class="text-gray-300">You'll get an introduction to the most common languages used in data analysis, their strengths and weaknesses, and guidance on which languages to learn based on your career goals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Assessment & Projects -->
+      <section id="assessment" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Assessment & Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Assessment Methods</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Weekly quizzes on key concepts</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Hands-on exercises with different data types</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Discussion participation on data quality topics</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Final comprehensive assessment</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Projects</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Data ecosystem mapping project</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Data type identification and classification exercise</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>File format conversion mini-project</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                <span>Data source connection demonstration</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resources -->
+      <section id="resources" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Learning Resources</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-primary-400">Required Materials</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-book text-primary-400 mt-1 mr-2"></i>
+                  <span>"Data Analysis Fundamentals" course handbook</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-laptop text-primary-400 mt-1 mr-2"></i>
+                  <span>Computer with internet access</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-file-excel text-primary-400 mt-1 mr-2"></i>
+                  <span>Spreadsheet software (Excel, Google Sheets, etc.)</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-primary-400">Supplementary Resources</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-external-link-alt text-primary-400 mt-1 mr-2"></i>
+                  <span>Online data quality tutorials</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-video text-primary-400 mt-1 mr-2"></i>
+                  <span>Video lectures on data types and formats</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-users text-primary-400 mt-1 mr-2"></i>
+                  <span>Data analysis community forums</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps -->
+      <section id="next-steps" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Next Steps</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="DACourse_ExcelV1.html" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-table"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Data Analysis with Excel</h3>
+            <p class="text-gray-400 mb-4">Learn practical data analysis techniques using Microsoft Excel.</p>
+            <span class="text-primary-400 flex items-center">
+              Continue to this course <i class="fas fa-arrow-right ml-2"></i>
+            </span>
+          </a>
+          
+          <a href="#" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">SQL for Data Analysis</h3>
+            <p class="text-gray-400 mb-4">Master database querying and data manipulation with SQL.</p>
+            <span class="text-primary-400 flex items-center">
+              Coming soon <i class="fas fa-clock ml-2"></i>
+            </span>
+          </a>
+          
+          <a href="#" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Data Visualization</h3>
+            <p class="text-gray-400 mb-4">Create compelling visual representations of your data analysis.</p>
+            <span class="text-primary-400 flex items-center">
+              Coming soon <i class="fas fa-clock ml-2"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="index.html" class="text-xl font-bold text-white">
+            <span class="text-primary-400">John</span>.<span class="text-white">J</span>.<span class="text-primary-300">Lawal</span><span class="text-primary-500">()</span>
+          </a>
+          <p class="text-gray-400 mt-2">Data Science & Software Development</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-medium text-xl"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-dark-700 mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2023 John J. Lawal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Animate on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateElements = document.querySelectorAll('.animate-on-scroll');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>

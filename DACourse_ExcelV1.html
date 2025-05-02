@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Analysis with Excel - JJL Training</title>
+  
+  <!-- Favicon -->
+  <link href="assets/img/jjl_favi.png" rel="icon">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            secondary: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+            }
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.7s ease-out forwards',
+            float: 'float 4s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Motion Background */
+    .motion-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+      background: radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(6,182,212,0.1) 50%, rgba(15,23,42,0.1) 100%);
+      animation: moveBackground 20s linear infinite;
+    }
+    
+    @keyframes moveBackground {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
+    
+    /* Animate on scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Course content styles */
+    .course-section {
+      border-left: 4px solid #10b981;
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .course-section:before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #10b981;
+      left: -10px;
+      top: 0;
+    }
+
+    .course-card {
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Excel formula styling */
+    .excel-formula {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: rgba(15, 23, 42, 0.6);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      border: 1px solid #334155;
+      color: #34d399;
+    }
+  </style>
+</head>
+
+<body class="bg-dark-900">
+  <!-- Motion Background -->
+  <div class="motion-background"></div>
+  
+  <!-- Navigation -->
+  <nav class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="bg-dark-900 bg-opacity-70 backdrop-blur-md border-b border-dark-700">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-white">
+            <span class="text-primary-400">John</span>.<span class="text-white">J</span>.<span class="text-primary-300">Lawal</span><span class="text-primary-500">()</span>
+          </a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-300 hover:text-primary-400 transition-colors">Portfolio</a>
+          <a href="DACourse.html" class="text-gray-300 hover:text-primary-400 transition-colors">Course Home</a>
+          <a href="DACourse_intro.html" class="text-gray-300 hover:text-primary-400 transition-colors">Intro to DA</a>
+          <a href="DACourse_ExcelV1.html" class="text-gray-300 hover:text-primary-400 transition-colors">DA with Excel</a>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-300 hover:text-primary-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-dark-800 bg-opacity-95 backdrop-blur-md md:hidden">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="index.html" class="text-gray-300 hover:text-primary-400 py-2">Portfolio</a>
+        <a href="DACourse.html" class="text-gray-300 hover:text-primary-400 py-2">Course Home</a>
+        <a href="DACourse_intro.html" class="text-gray-300 hover:text-primary-400 py-2">Intro to DA</a>
+        <a href="DACourse_ExcelV1.html" class="text-gray-300 hover:text-primary-400 py-2">DA with Excel</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Course Header -->
+  <section class="pt-32 pb-20 bg-gradient-to-b from-dark-800 to-dark-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-900/20 to-secondary-900/20 z-0"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="w-full md:w-3/5">
+          <p class="text-primary-400 code-font mb-4 animate-fadeIn">/* Modules 1, 2, 4, 5, 6 */</p>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fadeIn">
+            Data Analysis with Excel
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 animate-fadeIn">
+            Master spreadsheet techniques for effective data analysis and visualization
+          </p>
+          <div class="flex flex-wrap gap-4 animate-fadeIn">
+            <a href="#curriculum" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block">
+              View Curriculum
+              <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+            <a href="DACourse.html" class="bg-transparent border border-primary-500 text-primary-400 hover:text-primary-300 px-6 py-3 rounded-md font-medium transition-all hover:shadow-lg hover:translate-y-[-2px] inline-block">
+              Back to Course Overview
+            </a>
+          </div>
+        </div>
+        <div class="w-full md:w-2/5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="absolute inset-0 bg-primary-500 rounded-lg blur-xl opacity-20 animate-pulse"></div>
+            <div class="relative bg-dark-800 border border-dark-600 rounded-lg overflow-hidden">
+              <div class="aspect-w-16 aspect-h-9 w-full">
+                <img src="assets/img/excel-analysis.jpg" alt="Excel Data Analysis" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="bg-primary-500/20 text-primary-300 px-3 py-1 rounded-full text-sm font-medium">5 Modules</span>
+                  <span class="text-gray-400"><i class="fas fa-clock mr-2"></i>8 weeks</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Course Highlights</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Spreadsheet Fundamentals</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Data Cleaning Techniques</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-2"></i>
+                    <span>Advanced Analysis with Pivot Tables</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container mx-auto px-4">
+      <!-- Course Overview -->
+      <section id="overview" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Course Overview</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <p class="text-gray-300 text-lg mb-6">
+            This comprehensive course teaches you how to use Microsoft Excel as a powerful tool for data analysis. From basic spreadsheet operations to advanced analytical techniques, you'll learn everything you need to transform raw data into meaningful insights.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-dark-700 p-4 rounded-lg">
+              <h4 class="font-semibold mb-2 text-primary-400"><i class="fas fa-users mr-2"></i>Target Audience</h4>
+              <p class="text-gray-300">Business professionals, data analysts, researchers, students, and anyone who works with data and wants to improve their Excel skills for analysis.</p>
+            </div>
+            <div class="bg-dark-700 p-4 rounded-lg">
+              <h4 class="font-semibold mb-2 text-primary-400"><i class="fas fa-graduation-cap mr-2"></i>Prerequisites</h4>
+              <p class="text-gray-300">Basic computer skills and familiarity with Microsoft Excel. No advanced Excel knowledge required.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learning Objectives -->
+      <section id="objectives" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Learning Objectives</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-table"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Master Spreadsheet Basics</h4>
+            <p class="text-gray-400">Learn essential spreadsheet operations and understand how to organize data effectively.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Create Powerful Formulas</h4>
+            <p class="text-gray-400">Develop skills in creating and using formulas and functions for data analysis.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-broom"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Clean and Prepare Data</h4>
+            <p class="text-gray-400">Learn techniques to clean, transform, and prepare data for analysis.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-filter"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Filter and Sort Data</h4>
+            <p class="text-gray-400">Master techniques for filtering, sorting, and organizing data for analysis.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Create Pivot Tables</h4>
+            <p class="text-gray-400">Learn to create and use pivot tables for advanced data analysis and summarization.</p>
+          </div>
+          
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-search"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Perform Lookups</h4>
+            <p class="text-gray-400">Master VLOOKUP, HLOOKUP, and other lookup functions for data retrieval and analysis.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Curriculum -->
+      <section id="curriculum" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-12 text-center">Detailed Curriculum</h2>
+        
+        <!-- Module 1 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Module 1: Introduction to Spreadsheets</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>History and evolution of spreadsheets</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Understanding the Excel interface</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Workbooks, worksheets, cells, and ranges</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Navigating and selecting in Excel</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Using spreadsheets for data analysis</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Spreadsheets are powerful tools for organizing, analyzing, and visualizing data. Understanding the fundamentals of how spreadsheets work is essential for effective data analysis.</p>
+                <p class="text-gray-300">This module introduces you to the basic concepts of spreadsheets and how they can be used as data analysis tools, setting the foundation for more advanced techniques in later modules.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 2 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Module 2: Getting Started with Using Excel Spreadsheets</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Entering and editing data in cells</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Copying, cutting, and pasting data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Using AutoFill and Flash Fill</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Formatting cells and data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to basic formulas</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Understanding cell references (relative, absolute, mixed)</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Efficient data entry and manipulation are essential skills for working with spreadsheets. This module covers the fundamental operations for working with data in Excel.</p>
+                <p class="text-gray-300 mb-4">You'll learn how to enter, edit, and format data, as well as how to create basic formulas to perform calculations. Understanding cell references is particularly important as it forms the foundation for more complex formulas.</p>
+                <div class="bg-dark-700 p-4 rounded-lg mt-4">
+                  <h5 class="font-medium mb-2 text-primary-300">Example Formula:</h5>
+                  <p class="excel-formula">=SUM(A1:A10)</p>
+                  <p class="text-sm text-gray-400 mt-2">This formula adds all values in cells A1 through A10.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 3 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Module 4: Cleaning Data</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Identifying data quality issues</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Removing duplicate records</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Handling missing or empty data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Fixing inconsistent data formats</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Using text functions for data cleaning</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Data validation techniques</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Data cleaning is a critical step in the data analysis process. Raw data often contains errors, duplicates, and inconsistencies that need to be addressed before analysis.</p>
+                <p class="text-gray-300 mb-4">This module teaches you how to identify and fix common data quality issues using Excel's built-in features and functions, ensuring your analysis is based on clean, reliable data.</p>
+                <div class="bg-dark-700 p-4 rounded-lg mt-4">
+                  <h5 class="font-medium mb-2 text-primary-300">Useful Functions:</h5>
+                  <p class="excel-formula">TRIM(), PROPER(), CONCATENATE(), LEFT(), RIGHT(), MID()</p>
+                  <p class="text-sm text-gray-400 mt-2">These text functions are invaluable for cleaning and standardizing text data.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 4 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Module 5: Data Analysis Basics, Filtering and Sorting Data</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to data analysis concepts</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Creating and using tables in Excel</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Sorting data (single-level and multi-level)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Filtering data using AutoFilter</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Advanced filtering techniques</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Using VLOOKUP and HLOOKUP functions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Statistical functions for data analysis</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Filtering and sorting are fundamental techniques for organizing and analyzing data in Excel. These operations allow you to focus on specific subsets of your data and identify patterns.</p>
+                <p class="text-gray-300 mb-4">This module also introduces lookup functions, which are powerful tools for retrieving specific data from large datasets, and statistical functions for numerical analysis.</p>
+                <div class="bg-dark-700 p-4 rounded-lg mt-4">
+                  <h5 class="font-medium mb-2 text-primary-300">VLOOKUP Example:</h5>
+                  <p class="excel-formula">=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])</p>
+                  <p class="text-sm text-gray-400 mt-2">VLOOKUP searches for a value in the first column of a table and returns a value in the same row from a specified column.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Module 5 -->
+        <div class="course-section">
+          <h3 class="text-2xl font-semibold mb-6 text-primary-400">Module 6: Using Pivot Tables</h3>
+          <div class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-xl font-medium mb-4">Topics Covered</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Introduction to pivot tables</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Creating your first pivot table</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Configuring pivot table fields</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Grouping and filtering pivot table data</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Creating calculated fields in pivot tables</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Pivot charts for data visualization</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-circle text-primary-400 text-xs mt-1.5 mr-3"></i>
+                    <span>Slicers and timelines for interactive analysis</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-xl font-medium mb-4">Key Concepts</h4>
+                <p class="text-gray-300 mb-4">Pivot tables are one of Excel's most powerful features for data analysis. They allow you to summarize, analyze, explore, and present your data in a flexible and interactive way.</p>
+                <p class="text-gray-300 mb-4">This module teaches you how to create and customize pivot tables to quickly analyze large datasets, identify trends, and create meaningful reports and visualizations.</p>
+                <div class="bg-dark-700 p-4 rounded-lg mt-4">
+                  <h5 class="font-medium mb-2 text-primary-300">Pivot Table Benefits:</h5>
+                  <ul class="text-sm text-gray-400 space-y-1">
+                    <li>• Summarize large datasets quickly</li>
+                    <li>• Perform complex calculations automatically</li>
+                    <li>• Create interactive reports</li>
+                    <li>• Analyze data from multiple perspectives</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final Project -->
+      <section id="project" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Final Project</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <h3 class="text-2xl font-semibold mb-4 text-primary-400">Comprehensive Data Analysis Project</h3>
+          <p class="text-gray-300 mb-6">The course culminates in a two-part final project where you'll apply all the skills you've learned to analyze a real-world dataset.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-dark-700 p-5 rounded-lg">
+              <h4 class="text-xl font-medium mb-3 text-primary-300">Part 1: Data Preparation</h4>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Import and organize raw data</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Clean and validate the dataset</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Transform data into analysis-ready format</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Document data cleaning steps</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-dark-700 p-5 rounded-lg">
+              <h4 class="text-xl font-medium mb-3 text-primary-300">Part 2: Analysis & Reporting</h4>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Create pivot tables for data summarization</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Perform statistical analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Build interactive dashboard</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-arrow-right text-primary-400 mt-1 mr-2"></i>
+                  <span>Present findings and recommendations</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-8 p-5 bg-primary-900/20 border border-primary-700/30 rounded-lg">
+            <h4 class="text-lg font-medium mb-2 flex items-center">
+              <i class="fas fa-lightbulb text-primary-400 mr-2"></i>
+              <span>Project Outcome</span>
+            </h4>
+            <p class="text-gray-300">By completing this project, you'll demonstrate your ability to use Excel for end-to-end data analysis, from data preparation to insights generation. You'll create a professional-quality analysis workbook that can be added to your portfolio to showcase your Excel data analysis skills.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resources -->
+      <section id="resources" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Learning Resources</h2>
+        <div class="max-w-3xl mx-auto bg-dark-800 bg-opacity-50 p-8 rounded-lg border border-dark-700">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-primary-400">Required Materials</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-laptop text-primary-400 mt-1 mr-2"></i>
+                  <span>Computer with Microsoft Excel (2016 or later)</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-book text-primary-400 mt-1 mr-2"></i>
+                  <span>"Excel Data Analysis" course handbook</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-file-excel text-primary-400 mt-1 mr-2"></i>
+                  <span>Practice datasets (provided)</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-4 text-primary-400">Supplementary Resources</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-video text-primary-400 mt-1 mr-2"></i>
+                  <span>Excel function tutorial videos</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-file-alt text-primary-400 mt-1 mr-2"></i>
+                  <span>Excel formula cheat sheets</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-external-link-alt text-primary-400 mt-1 mr-2"></i>
+                  <span>Online Excel forums and communities</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps -->
+      <section id="next-steps" class="py-16 animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8 text-center">Next Steps</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="DACourse_intro.html" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Introduction to Data Analytics</h3>
+            <p class="text-gray-400 mb-4">Learn about the data analyst ecosystem and types of data.</p>
+            <span class="text-primary-400 flex items-center">
+              View this course <i class="fas fa-arrow-right ml-2"></i>
+            </span>
+          </a>
+          
+          <a href="#" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">SQL for Data Analysis</h3>
+            <p class="text-gray-400 mb-4">Master database querying and data manipulation with SQL.</p>
+            <span class="text-primary-400 flex items-center">
+              Coming soon <i class="fas fa-clock ml-2"></i>
+            </span>
+          </a>
+          
+          <a href="#" class="bg-dark-800 bg-opacity-50 rounded-lg p-6 border border-dark-700 hover:border-primary-500 transition-all course-card">
+            <div class="text-primary-400 text-3xl mb-4">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Data Visualization</h3>
+            <p class="text-gray-400 mb-4">Create compelling visual representations of your data analysis.</p>
+            <span class="text-primary-400 flex items-center">
+              Coming soon <i class="fas fa-clock ml-2"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="index.html" class="text-xl font-bold text-white">
+            <span class="text-primary-400">John</span>.<span class="text-white">J</span>.<span class="text-primary-300">Lawal</span><span class="text-primary-500">()</span>
+          </a>
+          <p class="text-gray-400 mt-2">Data Science & Software Development</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+            <i class="fab fa-medium text-xl"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-dark-700 mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2023 John J. Lawal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Animate on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateElements = document.querySelectorAll('.animate-on-scroll');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>
